@@ -9,19 +9,10 @@ package themanor;
  *
  * @author alexa
  */
-public class Wardrobe extends Item {
+public class Outside extends Place {
     
-    public Wardrobe() {
-        super();
-    }
-
-    public Wardrobe(Thing itemHidden) {
-        super(itemHidden);
-    }
-
-    @Override
-    public void use() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Outside(String name) {
+        super(name);
     }
 
     @Override

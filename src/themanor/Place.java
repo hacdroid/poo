@@ -33,6 +33,13 @@ public abstract class Place {
             this.listExit.add(sortie);
         }
         
+        public List<Thing> getThings(){
+            return this.listThing;
+        }
+        
+        public List<Exit> getExits(){
+            return this.listExit;
+        }
 
 	/**
 	 * 
