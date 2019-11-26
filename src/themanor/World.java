@@ -25,61 +25,61 @@ public class World {
     private void initGame(){
         Place hall = new Hall("hall");
         Place office = new Office("office");
-        Place sd_bain = new Bathroom("bathroom");
-        Place sa_manger = new Lunchroom("lunchroom");
-        Place cuisine = new Kitchen("cuisine");
-        Place debarras = new Storeroom("debarras");
-        Place sd_vie = new Livingroom("livingroom");
-        Place chambre1 = new Bedroom("chambre1");
-        Place chambre2 = new Bedroom("chambre2");
-        Place sejour = new Loundge("séjour");
-        Place reserve = new Reserve("réserve");
+        Place bathroom = new Bathroom("bathroom");
+        Place lunchroom = new Lunchroom("lunchroom");
+        Place kitchen = new Kitchen("kitchen");
+        Place storeroom = new Storeroom("storeroom");
+        Place livingroom = new Livingroom("livingroom");
+        Place bedroom1 = new Bedroom("bedroom1");
+        Place bedroom2 = new Bedroom("bedroom2");
+        Place loundge = new Loundge("loundge");
+        Place reserve = new Reserve("reserve");
         Place garage = new Garage("garage");
-        Place jardin = new Garden("jardin");
-        Place dehors = new Outside("outside");
+        Place garden = new Garden("garden");
+        Place outside = new Outside("outside");
         
          /*
         Initialisation des sorties
         */       
-        hall.addExit("outside", new LockedDoor(dehors,4));
+        hall.addExit("outside", new LockedDoor(outside,4));
         hall.addExit("office", new Door(office));
-        hall.addExit("livingroom", new Door(sd_vie));
-        hall.addExit("lunchroom", new Door(sa_manger));
+        hall.addExit("livingroom", new Door(livingroom));
+        hall.addExit("lunchroom", new Door(lunchroom));
 
-        office.addExit("bathroom", new LockedDoor(sd_bain,3));
-        office.addExit("livingroom", new Door(sd_vie));
+        office.addExit("bathroom", new LockedDoor(bathroom,3));
+        office.addExit("livingroom", new Door(livingroom));
         office.addExit("hall", new Door(hall));
 
-        sd_bain.addExit("office", new Door(office));
+        bathroom.addExit("office", new Door(office));
         
-        sa_manger.addExit("hall", new Door(hall));
-        sa_manger.addExit("kitchen", new Door(cuisine));
+        lunchroom.addExit("hall", new Door(hall));
+        lunchroom.addExit("kitchen", new Door(kitchen));
 
-        cuisine.addExit("lunchroom", new Door(sa_manger));
+        kitchen.addExit("lunchroom", new Door(lunchroom));
         
-        debarras.addExit("livingroom", new Door(sd_vie));
+        storeroom.addExit("livingroom", new Door(livingroom));
         
-        sd_vie.addExit("hall", new Door(hall));
-        sd_vie.addExit("office", new Door(office));
-        sd_vie.addExit("reserve", new Door(reserve));
-        sd_vie.addExit("sejour", new LockedDoor(sejour,2));
-        sd_vie.addExit("bedroom1", new Door(chambre1));
+        livingroom.addExit("hall", new Door(hall));
+        livingroom.addExit("office", new Door(office));
+        livingroom.addExit("storeroom", new Door(storeroom));
+        livingroom.addExit("loundge", new LockedDoor(loundge,2));
+        livingroom.addExit("bedroom1", new Door(bedroom1));
         
-        chambre1.addExit("livingroom", new Door(sd_vie));
-        chambre1.addExit("reserve", new SpecialDoor(reserve));
-        chambre1.addExit("bedroom2", new LockedDoor(chambre2,5));
+        bedroom1.addExit("livingroom", new Door(livingroom));
+        bedroom1.addExit("reserve", new SpecialDoor(reserve));
+        bedroom1.addExit("bedroom2", new LockedDoor(bedroom2,5));
         
-        chambre2.addExit("bedroom1", new Door(chambre1));
+        bedroom2.addExit("bedroom1", new Door(bedroom1));
         
-        sejour.addExit("livingroom", new Door(sd_vie));
-        sejour.addExit("garden", new Door(jardin));
+        loundge.addExit("livingroom", new Door(livingroom));
+        loundge.addExit("garden", new Door(garden));
         
-        reserve.addExit("bedroom1", new Door(chambre1));
+        reserve.addExit("bedroom1", new Door(bedroom1));
         
-        garage.addExit("garden", new Door(jardin));
+        garage.addExit("garden", new Door(garden));
         
-        jardin.addExit("garage", new LockedDoor(garage,1));
-        jardin.addExit("sejour", new Door(sejour));
+        garden.addExit("garage", new LockedDoor(garage,1));
+        garden.addExit("loundge", new Door(loundge));
         
         
         /*
@@ -90,30 +90,30 @@ public class World {
 
         office.addThing(new NPC(new Key(1))); //bottle d'eau contre clé
         
-        sd_bain.addThing(new Detergent());
+        bathroom.addThing(new Detergent());
         
-        sa_manger.addThing(new Chair(new Stick()));
-        sa_manger.addThing(new Wardrobe(new Key(5)));
+        lunchroom.addThing(new Chair(new Stick()));
+        lunchroom.addThing(new Wardrobe(new Key(5)));
         
-        cuisine.addThing(new Bottle());
+        kitchen.addThing(new Bottle());
        
-        debarras.addThing(new Bat(new Electricmeter(new Key(3))));
+        storeroom.addThing(new Bat(new Electricmeter(new Key(3))));
         
-        sd_vie.addThing(new Computer(sa_manger.getThings().get(1))); //CONNAIT L'ARMOIRE
+        livingroom.addThing(new Computer(lunchroom.getThings().get(1))); //CONNAIT L'ARMOIRE
         
-        chambre1.addThing(new Dust(new Key(2)));
-        chambre1.addThing(new SpecialDoorSocle(chambre1.getExits().get(1))); //AJOUTER SPECIAL DOOR
+        bedroom1.addThing(new Dust(new Key(2)));
+        bedroom1.addThing(new SpecialDoorSocle(bedroom1.getExits().get(1))); //AJOUTER SPECIAL DOOR
         
-        chambre2.addThing(new Plants(new Wire())); 
+        bedroom2.addThing(new Plants(new Wire())); 
         
-        sejour.addThing(new gameMap());
+        loundge.addThing(new gameMap());
         
         reserve.addThing(new Key(4));
   
         garage.addThing(new Torch());
         
-        jardin.addThing(new Scarecrow(new Fountain()));
-        jardin.addThing(new PoisonedLake(new Goldring()));
+        garden.addThing(new Scarecrow(new Fountain()));
+        garden.addThing(new PoisonedLake(new Goldring()));
         
         
         /*
@@ -121,18 +121,18 @@ public class World {
         */        
         this.LISTEPLACES.add(hall);
         this.LISTEPLACES.add(office);
-        this.LISTEPLACES.add(sd_bain);
-        this.LISTEPLACES.add(sa_manger);
-        this.LISTEPLACES.add(cuisine);
-        this.LISTEPLACES.add(debarras);
-        this.LISTEPLACES.add(sd_vie);
-        this.LISTEPLACES.add(chambre1);
-        this.LISTEPLACES.add(chambre2);
-        this.LISTEPLACES.add(sejour);
+        this.LISTEPLACES.add(bathroom);
+        this.LISTEPLACES.add(lunchroom);
+        this.LISTEPLACES.add(kitchen);
+        this.LISTEPLACES.add(storeroom);
+        this.LISTEPLACES.add(livingroom);
+        this.LISTEPLACES.add(bedroom1);
+        this.LISTEPLACES.add(bedroom2);
+        this.LISTEPLACES.add(loundge);
         this.LISTEPLACES.add(reserve);
         this.LISTEPLACES.add(garage);
-        this.LISTEPLACES.add(jardin);
-        this.LISTEPLACES.add(dehors);
+        this.LISTEPLACES.add(garden);
+        this.LISTEPLACES.add(outside);
         
         this.JOUEUR.setActualPlace(hall);
    }
