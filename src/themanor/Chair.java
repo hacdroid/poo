@@ -19,4 +19,4 @@ public class Chair extends Item {
     public String toString() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-}
+}//hey
