@@ -4,13 +4,13 @@ package themanor;
  *
  * @author alexa
  */
-public class Map extends Item {
+public class gameMap extends Item {
 
-    public Map() {
+    public gameMap() {
         super();
     }
 
-    public Map(Thing itemHidden) {
+    public gameMap(Thing itemHidden) {
         super(itemHidden);
     }
 
