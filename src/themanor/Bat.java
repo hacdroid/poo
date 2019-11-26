@@ -17,3 +17,5 @@ public class Bat extends Creature {
                 this.getHp() + " point(s) de vie.";
     }
 }
+
+//Test de commentaire de hugo ! 
