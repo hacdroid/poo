@@ -17,10 +17,12 @@ public class World {
         this.initGame();
     }
     
-    
-   private void initGame(){
+    /**
+     * Méthode d'intialisation des lieux, 
+     */
+    private void initGame(){
         Place hall = new Hall("hall");
-        Place bureau = new Office("bureau");
+        Place office = new Office("bureau");
         Place sd_bain = new Bathroom("sd_bain");
         Place sa_manger = new Lunchroom("sa_manger");
         Place cuisine = new Kitchen("cuisine");
@@ -34,19 +36,20 @@ public class World {
         Place jardin = new Garden("jardin");
         Place dehors = new Outside("dehors");
         
+        
         /*
         Initialisation des sorties
         */
         hall.addExit(new LockedDoor(dehors,4));
-        hall.addExit(new Door(bureau));
+        hall.addExit(new Door(office));
         hall.addExit(new Door(sd_vie));
         hall.addExit(new Door(sa_manger));
         
-        bureau.addExit(new LockedDoor(sd_bain,3));
-        bureau.addExit(new Door(sd_vie));
-        bureau.addExit(new Door(hall));
+        office.addExit(new LockedDoor(sd_bain,3));
+        office.addExit(new Door(sd_vie));
+        office.addExit(new Door(hall));
         
-        sd_bain.addExit(new Door(bureau));
+        sd_bain.addExit(new Door(office));
         
         sa_manger.addExit(new Door(hall));
         sa_manger.addExit(new Door(cuisine));
@@ -56,7 +59,7 @@ public class World {
         debarras.addExit(new Door(sd_vie));
         
         sd_vie.addExit(new Door(hall));
-        sd_vie.addExit(new Door(bureau));
+        sd_vie.addExit(new Door(office));
         sd_vie.addExit(new Door(reserve));
         sd_vie.addExit(new Door(sejour));
         sd_vie.addExit(new Door(chambre1));
@@ -77,13 +80,14 @@ public class World {
         jardin.addExit(new LockedDoor(garage,1));
         jardin.addExit(new Door(sejour));
         
+        
         /*
         Initialisation des items et créatures
         */
         hall.addThing(new Bread());
         hall.addThing(new Broom());
 
-        bureau.addThing(new NPC(new Key(1))); //bottle d'eau contre clé
+        office.addThing(new NPC(new Key(1))); //bottle d'eau contre clé
         
         sd_bain.addThing(new Detergent());
         
@@ -110,11 +114,12 @@ public class World {
         jardin.addThing(new Scarecrow(new Fountain()));
         jardin.addThing(new PoisonedLake(new Goldring()));
         
+        
         /*
         Memorisation des différents lieux du jeu avec leurs attributs
         */        
         this.LISTEPLACES.add(hall);
-        this.LISTEPLACES.add(bureau);
+        this.LISTEPLACES.add(office);
         this.LISTEPLACES.add(sd_bain);
         this.LISTEPLACES.add(sa_manger);
         this.LISTEPLACES.add(cuisine);

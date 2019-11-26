@@ -33,7 +33,7 @@ public abstract class Creature extends Thing {
             
             if (!this.getIsOut())
                 this.attack(player, this.DAMAGE);
-            else System.out.println("VOUS AVEZ TUER LE MONSTRE");
+            else System.out.println("VOUS AVEZ TUE LE MONSTRE");
         }
         else System.out.println("LE MONSTRE EST DEJA MORT");
     }
