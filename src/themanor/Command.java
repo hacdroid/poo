@@ -1,7 +1,7 @@
 package themanor;
 
 public enum Command {
-	GO, HELP, LOOK, TAKE, QUIT, USE, INVENTORY;
+	GO, HELP, LOOK, TAKE, QUIT, USE, INVENTORY, KILL;
 
 	private String desc;
 

@@ -11,7 +11,7 @@ public abstract class Place {
         private final String NAME;
         private final Map<String,Exit> EXITS;
 
-	public abstract String toString();
+
 
 	public Place(String name) {
             this.listThing = new ArrayList<>();
@@ -39,6 +39,16 @@ public abstract class Place {
         public Map<String,Exit> getExits(){
             return this.EXITS;
         }
+        
+        public Map<String,Exit> getOpenExits(){
+            Map<String,Exit> me = new LinkedHashMap<>();
+            for(Map.Entry<String, Exit> entry : this.EXITS.entrySet()){
+                if (entry.getValue().isOpen()){
+                    me.put(entry.getKey(), entry.getValue());
+                }
+            }  
+            return me;
+        }
 
 	/**
 	 * 
@@ -48,5 +58,10 @@ public abstract class Place {
 		// TODO - implement Place.rmvThing
 	throw new UnsupportedOperationException();
 	}
+        
+        @Override
+        public String toString(){
+            return "a " + this.getName() +"!";
+        }
 
 }

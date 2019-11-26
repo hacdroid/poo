@@ -6,10 +6,4 @@ public class Kitchen extends Place {
         super(name);
     }
 
-    
-    
-    @Override
-    public String toString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

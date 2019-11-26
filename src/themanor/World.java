@@ -5,17 +5,19 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public class World {
 
-    private final List<Place> LISTEPLACES;
+    private final Map<String,Place> LISTEPLACES;
     private final Player JOUEUR;
+    
     
 
     public World() {
         System.out.println("Veuillez entrer votre pseudonyme :");
         this.JOUEUR = new Player(new Scanner(System.in).nextLine(),this);
-        this.LISTEPLACES = new ArrayList<>();
+        this.LISTEPLACES = new LinkedHashMap<>();
         this.initGame();
     }
     
@@ -30,8 +32,8 @@ public class World {
         Place kitchen = new Kitchen("kitchen");
         Place storeroom = new Storeroom("storeroom");
         Place livingroom = new Livingroom("livingroom");
-        Place bedroom1 = new Bedroom("bedroom1");
-        Place bedroom2 = new Bedroom("bedroom2");
+        Place childbedroom = new Bedroom("child bedroom");
+        Place adultbedroom = new Bedroom("adult bedroom");
         Place loundge = new Loundge("loundge");
         Place reserve = new Reserve("reserve");
         Place garage = new Garage("garage");
@@ -63,18 +65,18 @@ public class World {
         livingroom.addExit("office", new Door(office));
         livingroom.addExit("storeroom", new Door(storeroom));
         livingroom.addExit("loundge", new LockedDoor(loundge,2));
-        livingroom.addExit("bedroom1", new Door(bedroom1));
+        livingroom.addExit("child bedroom", new Door(childbedroom));
         
-        bedroom1.addExit("livingroom", new Door(livingroom));
-        bedroom1.addExit("reserve", new SpecialDoor(reserve));
-        bedroom1.addExit("bedroom2", new LockedDoor(bedroom2,5));
+        childbedroom.addExit("livingroom", new Door(livingroom));
+        childbedroom.addExit("reserve", new SpecialDoor(reserve));
+        childbedroom.addExit("adult bedroom", new LockedDoor(adultbedroom,5));
         
-        bedroom2.addExit("bedroom1", new Door(bedroom1));
+        adultbedroom.addExit("child bedroom", new Door(childbedroom));
         
         loundge.addExit("livingroom", new Door(livingroom));
         loundge.addExit("garden", new Door(garden));
         
-        reserve.addExit("bedroom1", new Door(bedroom1));
+        reserve.addExit("bedroom1", new Door(childbedroom));
         
         garage.addExit("garden", new Door(garden));
         
@@ -101,10 +103,10 @@ public class World {
         
         livingroom.addThing(new Computer(lunchroom.getThings().get(1))); //CONNAIT L'ARMOIRE
         
-        bedroom1.addThing(new Dust(new Key(2)));
-        bedroom1.addThing(new SpecialDoorSocle(bedroom1.getExits().get(1))); //AJOUTER SPECIAL DOOR
+        childbedroom.addThing(new Dust(new Key(2)));
+        childbedroom.addThing(new SpecialDoorSocle(childbedroom.getExits().get(1))); //AJOUTER SPECIAL DOOR
         
-        bedroom2.addThing(new Plants(new Wire())); 
+        adultbedroom.addThing(new Plants(new Wire())); 
         
         loundge.addThing(new gameMap());
         
@@ -119,20 +121,20 @@ public class World {
         /*
         Memorisation des différents lieux du jeu avec leurs attributs
         */        
-        this.LISTEPLACES.add(hall);
-        this.LISTEPLACES.add(office);
-        this.LISTEPLACES.add(bathroom);
-        this.LISTEPLACES.add(lunchroom);
-        this.LISTEPLACES.add(kitchen);
-        this.LISTEPLACES.add(storeroom);
-        this.LISTEPLACES.add(livingroom);
-        this.LISTEPLACES.add(bedroom1);
-        this.LISTEPLACES.add(bedroom2);
-        this.LISTEPLACES.add(loundge);
-        this.LISTEPLACES.add(reserve);
-        this.LISTEPLACES.add(garage);
-        this.LISTEPLACES.add(garden);
-        this.LISTEPLACES.add(outside);
+        this.LISTEPLACES.put("hall",hall);
+        this.LISTEPLACES.put("office",office);
+        this.LISTEPLACES.put("bathroom",bathroom);
+        this.LISTEPLACES.put("lunchroom",lunchroom);
+        this.LISTEPLACES.put("kitchen",kitchen);
+        this.LISTEPLACES.put("storeroom",storeroom);
+        this.LISTEPLACES.put("livingroom",livingroom);
+        this.LISTEPLACES.put("bedroom1",childbedroom);
+        this.LISTEPLACES.put("bedroom2",adultbedroom);
+        this.LISTEPLACES.put("loundge",loundge);
+        this.LISTEPLACES.put("reserve",reserve);
+        this.LISTEPLACES.put("garage",garage);
+        this.LISTEPLACES.put("garden",garden);
+        this.LISTEPLACES.put("outside",outside);
         
         this.JOUEUR.setActualPlace(hall);
    }
@@ -141,10 +143,14 @@ public class World {
     public void start() {
         // TODO - implement World.start
 
-        System.out.println("Bienvenue dans.....................");
+        System.out.println("Welcome " + this.JOUEUR.getName() + " to \"the manor\"!");
         
-        
-        
+        while(!this.JOUEUR.getIsOut() || this.JOUEUR.getActualPlace().equals(this.LISTEPLACES.get("outside"))){
+            System.out.println("You are into " + this.JOUEUR.getActualPlace().toString());
+            
+            this.JOUEUR.saisieCommand();
+        }
+
         //while ! this.JOUEUR.isOut || this.JOUEUR.actualPlace=NULL
         
         //sout(place.toString())
@@ -160,8 +166,38 @@ public class World {
         //ELSE GAGNE
         //
         
+    }
+    
+
+    
+    
+//    public Place getPlaceVoisin(String place){
+//    
+//        if (this.JOUEUR.getActualPlace().getOpenExits().containsKey(place)){
+//            for(Map.Entry<String, Place> entry : this.LISTEPLACES.entrySet()){
+//                if (entry.getKey().equals(place)){
+//                    return entry.getValue();
+//                }
+//            }
+//        } else if (this.JOUEUR.getActualPlace().getExits().containsKey(place)) {
+//            System.out.println("This door seems locked! You cannot go there.");
+//        } else if (this.LISTEPLACES.containsKey(place)){
+//            System.out.println("This place is too far away!");
+//        } else {
+//            System.out.println("This place doesn't exist!");
+//        }
+//        return this.JOUEUR.getActualPlace();
+//    }
+    
+    public Place getPlaceVoisin(String place){
+    
+        if (this.JOUEUR.getActualPlace().getOpenExits().containsKey(place)) return this.LISTEPLACES.get(place);
+        else if (this.JOUEUR.getActualPlace().getExits().containsKey(place)) System.out.println("This door seems locked! You cannot go there.");
+        else if (this.JOUEUR.getActualPlace().getName().equals(place)) System.out.println("You already are into this place!");
+        else if (this.LISTEPLACES.containsKey(place)) System.out.println("This place is too far away!");
+        else System.out.println("This place doesn't exist!");
         
-        throw new UnsupportedOperationException();
+        return this.JOUEUR.getActualPlace();
     }
 
 }

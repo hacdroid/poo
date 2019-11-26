@@ -2,6 +2,7 @@ package themanor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Player {
 
@@ -10,6 +11,7 @@ public class Player {
 	private Command command;
 	private int hp;
 	private Place actualPlace;
+        private final World WORLD;
 
 	/**
 	 * 
@@ -19,7 +21,7 @@ public class Player {
 		this.NAME=name;
                 this.hp=20;
                 this.inventory= new ArrayList<>();
-                //actual Place
+                this.WORLD=w;
 	}
 
 	public int getHp() {
@@ -51,30 +53,53 @@ public class Player {
         
 
 	public void saisieCommand() {
-		if (!this.getIsOut()){
-                    //mettre commande dans this.command
-                    //executeCommand(List<String>);
-                    
-                    
+            if (!this.getIsOut()){
+                List<String> ls = new ArrayList<>();
+                Boolean isException = false;
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Saisie : ");
+                String commande = sc.next();
+                String arg = sc.next();
+                System.out.println("Vous avez saisi : " + commande +" " + arg);
+
+                ls.add(arg);
+
+                try {
+                    this.command=Command.valueOf(commande);
                 }
+                catch(IllegalArgumentException e){
+                    System.out.println("Commande non valide !");
+                    isException = true;
+                }
+
+                if (!isException){
+                    this.executeCommand(ls);
+                }
+
+            }
 	}
+        
+        public Place getActualPlace(){
+            return this.actualPlace;
+        }
+        
+        public String getName(){
+            return this.NAME;
+        }
+        
 
 	/**
 	 * 
 	 * @param ls
 	 */
 	public void executeCommand(List<String> ls) {
-
+            int nbArgs = 1;
+            
             switch(this.command){
                 case GO:
-                    
-                    //SI IL Y A UN SEUL ARGUMENT
-                    //   SI ELLE EST VOISINE
-                    //       this.actualPlace=?;
-                       // this.actualPlace.getName()
-                    
-                    
-                    
+                    if (nbArgs==1){
+                        this.actualPlace = this.WORLD.getPlaceVoisin(ls.get(0));
+                    }
                     break;
                 case HELP :
                     break;
@@ -87,6 +112,9 @@ public class Player {
                 case USE:
                     break;
                 case INVENTORY:
+                    break;
+                case KILL:
+                    this.hp=0;
                     break;
                 default:
                     System.out.println("Cette commande ne semble pas exister...");
