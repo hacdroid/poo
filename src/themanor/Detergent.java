@@ -9,6 +9,6 @@ public class Detergent extends Item {
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return("a detergent bottle of a brand that does not even exist anymore");
     }
 }

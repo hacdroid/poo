@@ -13,7 +13,7 @@ public class NPC extends Creature {
 
     @Override
     public String toString() {
-        return "Il y a une personne amicale qui vous regarde.";
+        return ("A friendly mans pread out at the ground");
     }
     
     public void attacked(Player player, int damage_taken){

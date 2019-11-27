@@ -1,22 +1,25 @@
 package themanor;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public abstract class Place {
 
-	private List<Thing> listThing;
+	//private List<Thing> listThing;
+        private Map<String,Thing> things;
         private final String NAME;
         private final Map<String,Exit> EXITS;
 
 
 
 	public Place(String name) {
-            this.listThing = new ArrayList<>();
+            //this.listThing = new ArrayList<>();
             this.NAME=name;
             this.EXITS = new LinkedHashMap<>();
+            this.things = new Hashtable<>();
 	}
         
         public String getName(){
@@ -24,16 +27,17 @@ public abstract class Place {
         }
 
 
-	public void addThing(Thing item) {
-            this.listThing.add(item);
+	public void addThing(String name, Thing item) {
+            //this.listThing.add(item);
+            this.things.put(name, item);
 	}
         
         public void addExit(String name, Exit sortie){
             this.EXITS.put(name,sortie);
         }
         
-        public List<Thing> getThings(){
-            return this.listThing;
+        public Map<String,Thing> getThings(){
+            return this.things;
         }
         
         public Map<String,Exit> getExits(){

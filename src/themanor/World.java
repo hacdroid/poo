@@ -63,8 +63,8 @@ public class World {
         
         livingroom.addExit("hall", new Door(hall));
         livingroom.addExit("office", new Door(office));
-        livingroom.addExit("storeroom", new Door(storeroom));
-        livingroom.addExit("loundge", new LockedDoor(loundge,2));
+        livingroom.addExit("storeroom", new LockedDoor(storeroom,2));
+        livingroom.addExit("loundge", new Door(loundge));
         livingroom.addExit("child_bedroom", new Door(childbedroom));
         
         childbedroom.addExit("livingroom", new Door(livingroom));
@@ -87,35 +87,35 @@ public class World {
         /*
         Initialisation des items et créatures
         */
-        hall.addThing(new Bread());
-        hall.addThing(new Broom());
+        hall.addThing("bread",new Bread());
+        hall.addThing("broom",new Broom());
 
-        office.addThing(new NPC(new Key(1))); //bottle d'eau contre clé
+        office.addThing("man",new NPC(new Key(1))); //bottle d'eau contre clé
         
-        bathroom.addThing(new Detergent());
+        bathroom.addThing("detergent",new Detergent());
         
-        lunchroom.addThing(new Chair(new Stick()));
-        lunchroom.addThing(new Wardrobe(new Key(5)));
+        lunchroom.addThing("chair",new Chair(new Stick()));
+        lunchroom.addThing("wardrobe",new Wardrobe(new Key(5)));
         
-        kitchen.addThing(new Bottle());
+        kitchen.addThing("bottle",new Bottle());
        
-        storeroom.addThing(new Bat(new Electricmeter(new Key(3))));
+        storeroom.addThing("bat",new Bat(new Electricmeter(new Key(3))));
         
-        livingroom.addThing(new Computer(lunchroom.getThings().get(1))); //CONNAIT L'ARMOIRE
+        livingroom.addThing("computer",new Computer(lunchroom.getThings().get(1))); //CONNAIT L'ARMOIRE
         
-        childbedroom.addThing(new Dust(new Key(2)));
-        childbedroom.addThing(new SpecialDoorSocle(childbedroom.getExits().get(1))); //AJOUTER SPECIAL DOOR
+        childbedroom.addThing("dust",new Dust(new Key(2)));
+        childbedroom.addThing("socle",new SpecialDoorSocle(childbedroom.getExits().get(1))); //AJOUTER SPECIAL DOOR
         
-        adultbedroom.addThing(new Plants(new Wire())); 
+        adultbedroom.addThing("plants",new Plants(new Wire())); 
         
-        loundge.addThing(new gameMap());
+        loundge.addThing("gameMap",new gameMap());
         
-        reserve.addThing(new Key(4));
+        reserve.addThing("key",new Key(4));
   
-        garage.addThing(new Torch());
+        garage.addThing("torch",new Torch());
         
-        garden.addThing(new Scarecrow(new Fountain()));
-        garden.addThing(new PoisonedLake(new Goldring()));
+        garden.addThing("scarecrow",new Scarecrow(new Fountain()));
+        garden.addThing("poisoned_lake",new PoisonedLake(new Goldring()));
         
         
         /*
@@ -147,7 +147,14 @@ public class World {
         
         
         
-        System.out.println("THE STORY OF THE MANOR BLABLA BLA You are into a hall");
+        System.out.println("You wake up .. you have a headache, you do not know where you are. \n" 
+                + "You get up, you have cramps in your legs and tremble lightly. \n"
+                + "You have to get out of here and go home, but the door is locked, how to get out?\n"
+                + "\n"
+                + "\n"
+                + "You are into a hall");
+        
+        
         
         while(!this.JOUEUR.getIsOut() || this.JOUEUR.getActualPlace().equals(this.LISTEPLACES.get("outside"))){
             
@@ -174,6 +181,15 @@ public class World {
         else System.out.println("This place doesn't exist!");
         
         return this.JOUEUR.getActualPlace();
+    }
+    //Deplacer le tout dans exits
+    
+    public Thing getThingInRoom(String item){
+    
+        if (this.JOUEUR.getActualPlace().getThings().containsKey(item)) return this.JOUEUR.getActualPlace().getThings().get(item);
+        else System.out.println("You can't find this item in this place !");
+        
+        return null;
     }
 
 }

@@ -13,8 +13,8 @@ public class Bat extends Creature {
     
     @Override
     public String toString() {
-        return "Il y a une chauve-souris qui semble hostile. Elle a " +
-                this.getHp() + " point(s) de vie.";
+        return "There is a big black bat flying in this room. It's got " +
+                this.getHp() + " life point.";
     }
 }
 
