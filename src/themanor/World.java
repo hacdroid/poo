@@ -153,10 +153,11 @@ public class World {
                 + "You have to get out of here and go home, but the door is locked, how to get out?\n"
                 + "\n"
                 + "\n"
-                + "You are into a hall");
+                + "You are into the hall");
         
         
-        while(!this.JOUEUR.getIsOut() || this.JOUEUR.getActualPlace().equals(this.LISTEPLACES.get("outside"))) this.JOUEUR.saisieCommand();
+        while(!this.JOUEUR.getIsOut()|| this.JOUEUR.getActualPlace().equals(this.LISTEPLACES.get("outside")))
+            this.JOUEUR.saisieCommand();
         
         
         if (this.JOUEUR.getIsOut()){

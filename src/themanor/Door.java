@@ -10,6 +10,6 @@ public class Door extends Exit {
     
     @Override
     public String toString() {
-        return "Une porte est ouverte, elle mène à " + this.getPlace().toString();
+        return "an opened door, it leads to " + this.getPlace().toString();
     }
 }

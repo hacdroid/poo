@@ -6,8 +6,8 @@ public abstract class Exit {
         private boolean isOpen;
         
         
-        public Exit(Place voisin){
-            this.place = voisin;
+        public Exit(Place place){
+            this.place = place;
             this.isOpen = false;
         }
         

@@ -164,11 +164,13 @@ public class Player {
             if (nbArgs>0){
                 if (actualThings.containsKey(ls.get(0))){        
                     System.out.println("It is a " + actualThings.get(ls.get(0)));
+                    //VERIFIE SIL EST TAKABLE
                 }
             } else {
                 if (actualThings.size()!=0){
-                    System.out.println("In this room, you can see :");
-                    actualThings.forEach((k,v)->System.out.println("- " + v));
+                    System.out.print("You are into ");
+                    System.out.println(this.actualPlace.toStringComplete());
+                    
                 } else System.out.println("There is nothing there."); 
             }
         }

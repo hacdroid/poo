@@ -13,14 +13,16 @@ public class LockedDoor extends Exit {
     
     @Override
     public String toString() {
-        String etat;
+        String desc = ""; 
         
-        if (this.isOpen()) etat = "ouverte, elle mène à " +
-                this.getPlace().toString();
-        else etat = "fermée";
+        if (this.isOpen()) {
+            desc = desc.concat("a locked");
+        } else desc = desc.concat("an unlocked");
         
-        return "Une porte est " + etat + ".";
+        desc = desc.concat(" door, it leads to " + this.getPlace().toString());
+        return desc;
     }
+        
     
     @Override
     public void open(){

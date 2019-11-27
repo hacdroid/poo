@@ -2,6 +2,6 @@ package themanor;
 
 public interface Takable {
 
-	void take();
+    public boolean isTaken();
 
 }
