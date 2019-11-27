@@ -2,12 +2,12 @@ package themanor;
 
 public abstract class Exit {
 
-	private Place voisin;
+	private Place place;
         private boolean isOpen;
         
         
         public Exit(Place voisin){
-            this.voisin = voisin;
+            this.place = voisin;
             this.isOpen = false;
         }
         
@@ -20,8 +20,8 @@ public abstract class Exit {
             return this.isOpen;
         }
         
-        public Place getVoisin (){
-            return this.voisin;
+        public Place getPlace (){
+            return this.place;
         }
 
 	public abstract String toString();

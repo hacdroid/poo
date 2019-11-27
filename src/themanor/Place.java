@@ -54,14 +54,6 @@ public abstract class Place {
             return me;
         }
 
-	/**
-	 * 
-	 * @param item
-	 */
-	public void rmvThing(Thing item) {
-		// TODO - implement Place.rmvThing
-	throw new UnsupportedOperationException();
-	}
         
         @Override
         public String toString(){

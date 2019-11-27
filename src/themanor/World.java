@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 public class World {
 
     private final Map<String,Place> LISTEPLACES;
+
     private final Player JOUEUR;
     
     
@@ -63,8 +64,8 @@ public class World {
         
         livingroom.addExit("hall", new Door(hall));
         livingroom.addExit("office", new Door(office));
-        livingroom.addExit("storeroom", new LockedDoor(storeroom,2));
-        livingroom.addExit("loundge", new Door(loundge));
+        livingroom.addExit("storeroom", new Door(storeroom));
+        livingroom.addExit("loundge", new LockedDoor(loundge,2));
         livingroom.addExit("child_bedroom", new Door(childbedroom));
         
         childbedroom.addExit("livingroom", new Door(livingroom));
@@ -155,41 +156,20 @@ public class World {
                 + "You are into a hall");
         
         
+        while(!this.JOUEUR.getIsOut() || this.JOUEUR.getActualPlace().equals(this.LISTEPLACES.get("outside"))) this.JOUEUR.saisieCommand();
         
-        while(!this.JOUEUR.getIsOut() || this.JOUEUR.getActualPlace().equals(this.LISTEPLACES.get("outside"))){
-            
-            this.JOUEUR.saisieCommand();
-        }
         
         if (this.JOUEUR.getIsOut()){
-            System.out.println("YOU LOOSE!");
+            System.out.println("YOU LOOSE : GAME OVER!");
         } else if(this.JOUEUR.getActualPlace().equals(this.LISTEPLACES.get("outside"))) {
             System.out.println("YOU WIN!");
         }
 
-        
     }
-    
 
-   
-    public Place getPlaceVoisin(String place){
-    
-        if (this.JOUEUR.getActualPlace().getOpenExits().containsKey(place)) return this.LISTEPLACES.get(place);
-        else if (this.JOUEUR.getActualPlace().getExits().containsKey(place)) System.out.println("This door seems locked! You cannot go there.");
-        else if (this.JOUEUR.getActualPlace().getName().equals(place)) System.out.println("You already are into this place!");
-        else if (this.LISTEPLACES.containsKey(place)) System.out.println("This place is too far away!");
-        else System.out.println("This place doesn't exist!");
-        
-        return this.JOUEUR.getActualPlace();
-    }
-    //Deplacer le tout dans exits
-    
-    public Thing getThingInRoom(String item){
-    
-        if (this.JOUEUR.getActualPlace().getThings().containsKey(item)) return this.JOUEUR.getActualPlace().getThings().get(item);
-        else System.out.println("You can't find this item in this place !");
-        
-        return null;
-    }
+    public Map<String, Place> getLISTEPLACES() {
+        return LISTEPLACES;
+    }    
+
 
 }

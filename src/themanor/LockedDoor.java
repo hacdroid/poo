@@ -16,7 +16,7 @@ public class LockedDoor extends Exit {
         String etat;
         
         if (this.isOpen()) etat = "ouverte, elle mène à " +
-                this.getVoisin().toString();
+                this.getPlace().toString();
         else etat = "fermée";
         
         return "Une porte est " + etat + ".";

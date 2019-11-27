@@ -14,7 +14,7 @@ public class SpecialDoor extends Exit {
         String etat;
         
         if (this.isOpen()) etat = "ouverte, elle mène à " +
-                this.getVoisin().toString();
+                this.getPlace().toString();
         else etat = "fermée et semble liée a un socle";
         
         return "Une porte étrange est " + etat + ".";

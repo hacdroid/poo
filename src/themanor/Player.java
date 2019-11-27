@@ -2,7 +2,9 @@ package themanor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Player {
@@ -52,6 +54,14 @@ public class Player {
             this.actualPlace=lieu;
         }
         
+        public Place getActualPlace(){
+            return this.actualPlace;
+        }
+        
+        public String getName(){
+            return this.NAME;
+        }
+        
 
 	public void saisieCommand() {
             if (!this.getIsOut()){
@@ -83,74 +93,117 @@ public class Player {
             }
 	}
         
-        public Place getActualPlace(){
-            return this.actualPlace;
-        }
-        
-        public String getName(){
-            return this.NAME;
-        }
-        
 
-	/**
-	 * 
-	 * @param ls
-	 */
 	public void executeCommand(List<String> ls) {
-            int nbArgs = ls.size();
-            
+
             switch(this.command){
                 case GO:
-                    if (nbArgs>0){
-                        this.actualPlace = this.WORLD.getPlaceVoisin(ls.get(0));
-                        System.out.println("You are going to a " + this.actualPlace.getName() + "!\n");
-                    } else {
-                        System.out.println("You cannot go nowhere!");
-                    }
-                    break;
+                    this.goCommand(ls.size(), ls);
+                    break;    
+                    
                 case HELP :
-                    for (int i = 0; i<Command.values().length;i++){
-                        Command.values()[i].display();
-                    }
+                    this.helpCommand();
                     break;
+                    
                 case LOOK:
-                    if ((this.WORLD.getThingInRoom(ls.get(0))!=null)){        
-                        System.out.println("There is" +this.WORLD.getThingInRoom(ls.get(0)));
-                    }
+                    this.lookCommand(ls.size(), ls);
                     break;
+                    
                 case TAKE:
-                    if ((this.WORLD.getThingInRoom(ls.get(0))!=null)){        
-                        this.inventory.add((Item)this.WORLD.getThingInRoom(ls.get(0)));
-                        System.out.println("You take "+this.inventory.get(this.inventory.size()-1));
-                        this.actualPlace.getThings().remove(ls.get(0));
-                    }
-                    //METTRE CHACUNE DES FONCTIONS DANS DES FONCTIONS SUBSIDIAIRES   
+                    this.takeCommand(ls);
                     break;
+                    
                 case QUIT:
-                    this.hp=0;
-                    System.out.println("You quit the game\n GAME OVER");
+                    this.quitCommand();
                     break;
+                    
                 case USE:
+                    this.useCommand(ls.size(),ls);
                     break;
+                    
                 case INVENTORY:
-                    if(!inventory.isEmpty()){
-                        System.out.println("Voici votre inventaire : ");
-                        for (Item i : inventory){
-                            System.out.println("- "+i);
-                        }
-                        break;
-                    }
+                    this.inventoryCommand();
+                    break;
+                    
                 default:
-                    System.out.println("ERREUR SWITCH");
-    
-
-                
+                    System.err.println("SWITCH ERROR!");
             }
-            
-            
-            
-            
-            
-	}
 
+	}
+        
+        
+        private void goCommand(int nbArgs, List<String> ls){
+            Map<String,Exit> actualExits = this.actualPlace.getExits();
+            Map<String,Exit> actualOpenExits = this.actualPlace.getOpenExits();
+            
+            if (nbArgs>0){
+                if (actualOpenExits.containsKey(ls.get(0))){
+                    this.actualPlace = actualExits.get(ls.get(0)).getPlace();
+                    System.out.println("You are going to a " + this.actualPlace.getName() + "!\n");
+                }
+                else if (actualExits.containsKey(ls.get(0))) System.out.println("This door seems locked! You cannot go there.");
+                else if (this.actualPlace.getName().equals(ls.get(0))) System.out.println("You already are into this place!");
+                else if (this.WORLD.getLISTEPLACES().containsKey(ls.get(0))) System.out.println("This place is too far away!");
+                else System.out.println("This place doesn't exist!");
+            } else {
+                System.out.println("You cannot go nowhere!");
+            }
+        }
+
+        
+        private void helpCommand(){
+            for (int i = 0; i<Command.values().length;i++){
+                Command.values()[i].display();
+            }
+        }
+        
+        
+        private void lookCommand(int nbArgs, List<String> ls){
+            Map<String,Thing> actualThings = this.actualPlace.getThings(); 
+            
+            if (nbArgs>0){
+                if (actualThings.containsKey(ls.get(0))){        
+                    System.out.println("It is a " + actualThings.get(ls.get(0)));
+                }
+            } else {
+                if (actualThings.size()!=0){
+                    System.out.println("In this room, you can see :");
+                    actualThings.forEach((k,v)->System.out.println("- " + v));
+                } else System.out.println("There is nothing there."); 
+            }
+        }
+        
+        
+        private void takeCommand(List<String> ls){
+            Map<String,Thing> actualThings = this.actualPlace.getThings();
+            
+            if (actualThings.containsKey(ls.get(0))){        //SI C TAKABLE
+                        
+                this.inventory.add((Item)actualThings.get(ls.get(0)));
+                System.out.println("You take "
+                        + this.inventory.get(this.inventory.size()-1));
+
+                this.actualPlace.getThings().remove(ls.get(0));
+            } 
+        }
+        
+        
+        private void quitCommand(){
+            this.hp=0;
+            System.out.println("You quit the game, bye!\n");
+        }
+        
+        
+        private void useCommand(int nbArgs, List<String> ls){
+            
+        }
+        
+        
+        
+        private void inventoryCommand(){
+            if(!inventory.isEmpty()){
+                System.out.println("Your inventory : ");
+                for (Item i : inventory) System.out.println("- "+ i);           
+            } else System.out.println("There is nothing in your inventory.");
+        }
 }

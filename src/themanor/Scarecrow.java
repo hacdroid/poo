@@ -13,7 +13,7 @@ public class Scarecrow extends Creature {
 
     @Override
     public String toString() {
-        return "Il y a un épouvantail qui semble hostile. Il a " +
-                this.getHp() + " point(s) de vie.";
+        return "a scarecrow which seems hostile. It has " +
+                this.getHp() + " life points.";
     }
 }
