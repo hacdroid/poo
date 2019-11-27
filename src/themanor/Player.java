@@ -57,6 +57,8 @@ public class Player {
                 List<String> ls = new ArrayList<>();
                 Boolean isException = false;
                 Scanner sc = new Scanner(System.in);
+                
+                
                 System.out.println("Saisie : ");
                 String commande = sc.next();
                 String arg = sc.next();

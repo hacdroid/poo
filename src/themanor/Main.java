@@ -10,9 +10,8 @@ public class Main {
         World w = new World();
         
         w.start();
+        
+        //FIN PERDU OU GAGNE ?
     }
-    
-    
-    
-    
+
 }

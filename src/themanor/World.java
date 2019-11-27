@@ -32,8 +32,8 @@ public class World {
         Place kitchen = new Kitchen("kitchen");
         Place storeroom = new Storeroom("storeroom");
         Place livingroom = new Livingroom("livingroom");
-        Place childbedroom = new Bedroom("child bedroom");
-        Place adultbedroom = new Bedroom("adult bedroom");
+        Place childbedroom = new Bedroom("child_bedroom");
+        Place adultbedroom = new Bedroom("adult_bedroom");
         Place loundge = new Loundge("loundge");
         Place reserve = new Reserve("reserve");
         Place garage = new Garage("garage");
@@ -65,18 +65,18 @@ public class World {
         livingroom.addExit("office", new Door(office));
         livingroom.addExit("storeroom", new Door(storeroom));
         livingroom.addExit("loundge", new LockedDoor(loundge,2));
-        livingroom.addExit("child bedroom", new Door(childbedroom));
+        livingroom.addExit("child_bedroom", new Door(childbedroom));
         
         childbedroom.addExit("livingroom", new Door(livingroom));
         childbedroom.addExit("reserve", new SpecialDoor(reserve));
-        childbedroom.addExit("adult bedroom", new LockedDoor(adultbedroom,5));
+        childbedroom.addExit("adult_bedroom", new LockedDoor(adultbedroom,5));
         
-        adultbedroom.addExit("child bedroom", new Door(childbedroom));
+        adultbedroom.addExit("child_bedroom", new Door(childbedroom));
         
         loundge.addExit("livingroom", new Door(livingroom));
         loundge.addExit("garden", new Door(garden));
         
-        reserve.addExit("bedroom1", new Door(childbedroom));
+        reserve.addExit("child_bedroom", new Door(childbedroom));
         
         garage.addExit("garden", new Door(garden));
         
@@ -128,8 +128,8 @@ public class World {
         this.LISTEPLACES.put("kitchen",kitchen);
         this.LISTEPLACES.put("storeroom",storeroom);
         this.LISTEPLACES.put("livingroom",livingroom);
-        this.LISTEPLACES.put("bedroom1",childbedroom);
-        this.LISTEPLACES.put("bedroom2",adultbedroom);
+        this.LISTEPLACES.put("child_bedroom",childbedroom);
+        this.LISTEPLACES.put("adult_bedroom",adultbedroom);
         this.LISTEPLACES.put("loundge",loundge);
         this.LISTEPLACES.put("reserve",reserve);
         this.LISTEPLACES.put("garage",garage);
@@ -141,8 +141,6 @@ public class World {
 
 
     public void start() {
-        // TODO - implement World.start
-
         System.out.println("Welcome " + this.JOUEUR.getName() + " to \"the manor\"!");
         
         while(!this.JOUEUR.getIsOut() || this.JOUEUR.getActualPlace().equals(this.LISTEPLACES.get("outside"))){
@@ -151,44 +149,11 @@ public class World {
             this.JOUEUR.saisieCommand();
         }
 
-        //while ! this.JOUEUR.isOut || this.JOUEUR.actualPlace=NULL
-        
-        //sout(place.toString())
-        // (item/exit demandé si LOOK)
-        //getactual place = temp_place
-        //while temp_place = actualplace et not this.JOUEUR.getIsOut(
-        //joueur.saisieCommand()
-        //end loop;
-        //
-        //end loop;
-        //
-        //if this.JOUEUR.isOut the PERDU
-        //ELSE GAGNE
-        //
         
     }
     
 
-    
-    
-//    public Place getPlaceVoisin(String place){
-//    
-//        if (this.JOUEUR.getActualPlace().getOpenExits().containsKey(place)){
-//            for(Map.Entry<String, Place> entry : this.LISTEPLACES.entrySet()){
-//                if (entry.getKey().equals(place)){
-//                    return entry.getValue();
-//                }
-//            }
-//        } else if (this.JOUEUR.getActualPlace().getExits().containsKey(place)) {
-//            System.out.println("This door seems locked! You cannot go there.");
-//        } else if (this.LISTEPLACES.containsKey(place)){
-//            System.out.println("This place is too far away!");
-//        } else {
-//            System.out.println("This place doesn't exist!");
-//        }
-//        return this.JOUEUR.getActualPlace();
-//    }
-    
+   
     public Place getPlaceVoisin(String place){
     
         if (this.JOUEUR.getActualPlace().getOpenExits().containsKey(place)) return this.LISTEPLACES.get(place);
