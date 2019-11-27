@@ -1,6 +1,7 @@
 package themanor;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -54,20 +55,20 @@ public class Player {
 
 	public void saisieCommand() {
             if (!this.getIsOut()){
-                List<String> ls = new ArrayList<>();
                 Boolean isException = false;
                 Scanner sc = new Scanner(System.in);
                 
                 
-                System.out.println("Saisie : ");
-                String commande = sc.next();
-                String arg = sc.next();
-                System.out.println("Vous avez saisi : " + commande +" " + arg);
+                System.out.print("\n");
+                String input = sc.nextLine();
+                
+                String[] splitInput = input.trim().split("\\s+");
 
-                ls.add(arg);
-
+                List<String> ls = new ArrayList<>(Arrays.asList(splitInput));
+                ls.remove(0);
+                
                 try {
-                    this.command=Command.valueOf(commande);
+                    this.command=Command.valueOf(splitInput[0]);
                 }
                 catch(IllegalArgumentException e){
                     System.out.println("Commande non valide !");
@@ -95,15 +96,21 @@ public class Player {
 	 * @param ls
 	 */
 	public void executeCommand(List<String> ls) {
-            int nbArgs = 1;
+            int nbArgs = ls.size();
             
             switch(this.command){
                 case GO:
-                    if (nbArgs==1){
+                    if (nbArgs>0){
                         this.actualPlace = this.WORLD.getPlaceVoisin(ls.get(0));
+                        System.out.println("You are going to a " + this.actualPlace.getName() + "!\n");
+                    } else {
+                        System.out.println("You cannot go nowhere!");
                     }
                     break;
                 case HELP :
+                    for (int i = 0; i<Command.values().length;i++){
+                        Command.values()[i].display();
+                    }
                     break;
                 case LOOK:
                     break;
@@ -115,11 +122,8 @@ public class Player {
                     break;
                 case INVENTORY:
                     break;
-                case KILL:
-                    this.hp=0;
-                    break;
                 default:
-                    System.out.println("Cette commande ne semble pas exister...");
+                    System.out.println("ERREUR SWITCH");
     
 
                 

@@ -141,12 +141,23 @@ public class World {
 
 
     public void start() {
+        System.out.println("At anytime, type HELP to see your commands.\n");
+        
         System.out.println("Welcome " + this.JOUEUR.getName() + " to \"the manor\"!");
         
+        
+        
+        System.out.println("THE STORY OF THE MANOR BLABLA BLA You are into a hall");
+        
         while(!this.JOUEUR.getIsOut() || this.JOUEUR.getActualPlace().equals(this.LISTEPLACES.get("outside"))){
-            System.out.println("You are into " + this.JOUEUR.getActualPlace().toString());
             
             this.JOUEUR.saisieCommand();
+        }
+        
+        if (this.JOUEUR.getIsOut()){
+            System.out.println("YOU LOOSE!");
+        } else if(this.JOUEUR.getActualPlace().equals(this.LISTEPLACES.get("outside"))) {
+            System.out.println("YOU WIN!");
         }
 
         
