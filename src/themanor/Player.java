@@ -61,9 +61,10 @@ public class Player {
                 
                 System.out.print("\n");
                 String input = sc.nextLine();
+                input = input.toLowerCase();
                 
                 String[] splitInput = input.trim().split("\\s+");
-
+                splitInput[0] = splitInput[0].toUpperCase();
                 List<String> ls = new ArrayList<>(Arrays.asList(splitInput));
                 ls.remove(0);
                 
@@ -113,15 +114,32 @@ public class Player {
                     }
                     break;
                 case LOOK:
+                    if ((this.WORLD.getThingInRoom(ls.get(0))!=null)){        
+                        System.out.println("There is" +this.WORLD.getThingInRoom(ls.get(0)));
+                    }
                     break;
                 case TAKE:
+                    if ((this.WORLD.getThingInRoom(ls.get(0))!=null)){        
+                        this.inventory.add((Item)this.WORLD.getThingInRoom(ls.get(0)));
+                        System.out.println("You take "+this.inventory.get(this.inventory.size()-1));
+                        this.actualPlace.getThings().remove(ls.get(0));
+                    }
+                    //METTRE CHACUNE DES FONCTIONS DANS DES FONCTIONS SUBSIDIAIRES   
                     break;
                 case QUIT:
+                    this.hp=0;
+                    System.out.println("You quit the game\n GAME OVER");
                     break;
                 case USE:
                     break;
                 case INVENTORY:
-                    break;
+                    if(!inventory.isEmpty()){
+                        System.out.println("Voici votre inventaire : ");
+                        for (Item i : inventory){
+                            System.out.println("- "+i);
+                        }
+                        break;
+                    }
                 default:
                     System.out.println("ERREUR SWITCH");
     
