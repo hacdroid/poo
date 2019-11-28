@@ -16,8 +16,6 @@ public class NPC extends Creature {
         return ("A friendly mans pread out at the ground");
     }
     
-    public void attacked(Player player, int damage_taken){
-        System.out.println("Aïe.");
-    }
+
     
 }

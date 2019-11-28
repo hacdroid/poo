@@ -2,8 +2,8 @@ package themanor;
 
 public abstract class Creature extends Thing {
 
-    private int hp;
-    private final int DAMAGE;
+    protected int hp;
+    protected final int DAMAGE;
     
     public Creature(int hp, int damage) {
         super();
@@ -26,21 +26,6 @@ public abstract class Creature extends Thing {
         return this.hp;
     }
     
-    public void attacked(Player player, int damage_taken){
-        if (!this.getIsOut())
-        {
-            this.hp -= damage_taken;
-            
-            if (!this.getIsOut())
-                this.attack(player, this.DAMAGE);
-            else System.out.println("VOUS AVEZ TUE LE MONSTRE");
-        }
-        else System.out.println("LE MONSTRE EST DEJA MORT");
-    }
-    
-    private void attack(Player player, int damage){
-        player.attacked(damage);
-    }
     
     public abstract String toString();
 }
