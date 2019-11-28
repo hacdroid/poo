@@ -13,7 +13,7 @@ public class NPC extends Creature {
 
     @Override
     public String toString() {
-        return ("A friendly mans pread out at the ground");
+        return ("A friendly mans spread out at the ground");
     }
     
 

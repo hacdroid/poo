@@ -16,12 +16,30 @@ public class WorldMap extends Item implements Takable {
 
     @Override
     public void use() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        System.out.print("     -----------------------------------------\n"+
+"       |Lake                           Fountain|\n"+
+"       |               Garden                  |\n"+
+"       |                                       |\n"+
+"---------------||-------------------------||----\n"+
+"|      |               |           |           |\n"+
+"|      |Loundge        |   ???	   |   Garage  |\n"+
+"|      |               |           |           |\n"+
+"|Store--------||-------------------|------------\n"+
+"|  room|               |child_bed- |adult_bed  |\n"+
+"|      =   Livingroom  =     room  =     room  |\n"+
+"|      |               |           |           |\n"+
+"------------||------||--------------------------\n"+
+"|      |       |       |           |           |\n"+
+"|Bath- =Office = Hall  =Lunchroom  =   Kitchen |\n"+
+"|  room|       |       |           |           |\n"+
+"------------------------------------------------\n"
+
+
+               );    }
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return("an old map");
     }
     
 }

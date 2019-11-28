@@ -90,7 +90,7 @@ public class World {
         */
         hall.addThing("bread",new Bread());
         hall.addThing("broom",new Broom());
-
+        
         office.addThing("man",new NPC(new Key(1))); //bottle d'eau contre clé
         
         bathroom.addThing("detergent",new Detergent());
@@ -109,7 +109,7 @@ public class World {
         
         adultbedroom.addThing("plants",new Plants(new Wire())); 
         
-        loundge.addThing("gameMap",new WorldMap());
+        loundge.addThing("oldMap",new WorldMap());
         
         reserve.addThing("key",new Key(4));
   

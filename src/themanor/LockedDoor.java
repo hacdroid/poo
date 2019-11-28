@@ -16,8 +16,8 @@ public class LockedDoor extends Exit {
         String desc = ""; 
         
         if (this.isOpen()) {
-            desc = desc.concat("a locked");
-        } else desc = desc.concat("an unlocked");
+            desc = desc.concat("an unlocked");
+        } else desc = desc.concat("a locked");
         
         desc = desc.concat(" door, it leads to " + this.getPlace().toString());
         return desc;
