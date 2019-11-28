@@ -46,8 +46,9 @@ public class Player {
             }
 	}
         
-        public void attack(Creature monstre, int damage){
+        public void attack(Attackable monstre, int damage){
             monstre.attacked(this, damage);
+            
         }
         
         public void setActualPlace(Place lieu){
@@ -209,6 +210,25 @@ public class Player {
         
         
         private void useCommand(int nbArgs, List<String> ls){
+            Map<String,Thing> actualThings = this.actualPlace.getThings();
+            Map<String,Exit> actualExits = this.actualPlace.getExits();
+            Map<String,Exit> actualOpenExits = this.actualPlace.getOpenExits();
+            
+            /*
+            SI IL Y A > UN ARGUMENT ->
+                  DE QUEL TYPE EST IL ?
+            
+                  SIL Y A > DEUX ARGUMENTS ->
+                      DE QUEL TYPE EST IL ?
+            
+            
+            SINON -> NOPE
+            */
+            
+            
+            /**/
+            
+            
             
         }
         
