@@ -1,6 +1,6 @@
 package themanor;
 
-public class Goldring extends Item {
+public class Goldring extends Item implements Takable {
 
     @Override
     public void use() {

@@ -109,7 +109,7 @@ public class World {
         
         adultbedroom.addThing("plants",new Plants(new Wire())); 
         
-        loundge.addThing("gameMap",new gameMap());
+        loundge.addThing("gameMap",new WorldMap());
         
         reserve.addThing("key",new Key(4));
   

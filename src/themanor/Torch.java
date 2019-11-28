@@ -1,6 +1,6 @@
 package themanor;
 
-public class Torch extends Item {
+public class Torch extends Item implements Takable {
     
     @Override
     public void use() {

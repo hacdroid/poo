@@ -1,6 +1,6 @@
 package themanor;
 
-public class Stick extends Item {
+public class Stick extends Item implements Takable {
 
     @Override
     public void use() {

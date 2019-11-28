@@ -1,6 +1,6 @@
 package themanor;
 
-public class Broom extends Item {
+public class Broom extends Item implements Takable{
 
     public Broom() {
         super();

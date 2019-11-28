@@ -1,6 +1,6 @@
 package themanor;
 
-public class Bottle extends Item {
+public class Bottle extends Item implements Takable {
 
     @Override
     public void use() {

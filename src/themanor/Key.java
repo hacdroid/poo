@@ -1,6 +1,6 @@
 package themanor;
 
-public class Key extends Item {
+public class Key extends Item implements Takable {
     private final int CODE; //ON A DECIDE D'UTILISER UN SYSTEME DE CODE AVEC LES PORTES
     
     
