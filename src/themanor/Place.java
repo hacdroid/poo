@@ -54,15 +54,34 @@ public abstract class Place {
             return me;
         }
 
+        public Map<String,Item> getItems(){
+            Map<String,Item> mi = new LinkedHashMap<>();
+            for(Map.Entry<String, Thing> entry : this.things.entrySet()){
+                if( entry.getValue() instanceof Item ){ 
+                    mi.put(entry.getKey(), (Item)entry.getValue());
+                }
+            }  
+            return mi;
+        }
+        
+        public Map<String,Creature> getCreatures(){
+            Map<String,Creature> mc = new LinkedHashMap<>();
+            for(Map.Entry<String, Thing> entry : this.things.entrySet()){
+                if( entry.getValue() instanceof Creature ){ 
+                    mc.put(entry.getKey(), (Creature)entry.getValue());
+                }
+            }  
+            return mc;
+        }
+        
+        
         
         @Override
         public String toString(){
             return "the " + this.getName() +"!";
         }
 
-        
-        
-        
+
         
         public String toStringComplete()
         {

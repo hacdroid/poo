@@ -210,23 +210,52 @@ public class Player {
         
         
         private void useCommand(int nbArgs, List<String> ls){
-            Map<String,Thing> actualThings = this.actualPlace.getThings();
+            Map<String,Creature> actualCreature = this.actualPlace.getCreatures();
+            Map<String,Item> actualItems = this.actualPlace.getItems();
             Map<String,Exit> actualExits = this.actualPlace.getExits();
-            Map<String,Exit> actualOpenExits = this.actualPlace.getOpenExits();
+            
             
             /*
             SI IL Y A > UN ARGUMENT ->
-                  DE QUEL TYPE EST IL ?
-            
+                  EST IL UN ITEM?
+                  
                   SIL Y A > DEUX ARGUMENTS ->
-                      DE QUEL TYPE EST IL ?
+                      DE QUEL TYPE EST IL ? ITEM EXIT OU CREATURE ?
             
             
             SINON -> NOPE
             */
             
             
-            /**/
+            /*
+            USE ITEM item.use() -> ITEM DANS INVENTAIRE
+            
+            USE ITEM ITEM item.use(item) -> ITEM 2 PAS DANS INVENTAIRE
+            
+            USE ITEM EXIT item.use(door)
+            
+            USE ITEM CREATURE item.use(creature)
+            */
+            
+            if (nbArgs>0){
+                if (/*ITEM DANS INVENTAIRE*/true){
+                    if (nbArgs>1){
+                        if (actualItems.containsKey(ls.get(0))) {/*ITEM (pas dans inventaire)*/}
+                        if (actualCreature.containsKey(ls.get(0))) {/*CREATURE*/}
+                        if (true){/*PORTE*/}
+                        //SELON LE TYPE DU DEUXIEME ITEM.
+                        
+                    } else {
+                        
+                        //item.use
+                        
+                    }
+                    
+                } else System.out.println("First argument is not an item into your inventory.");
+                
+            } else System.out.println("You cannot use void.");
+            
+            
             
             
             
