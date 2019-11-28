@@ -1,5 +1,7 @@
 package themanor;
 
+import themanor.exit.Door;
+import themanor.place.Place;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

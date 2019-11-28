@@ -1,5 +1,12 @@
 package themanor;
 
+import themanor.exit.Exit;
+import themanor.interfaces.Takable;
+import themanor.interfaces.Attackable;
+import themanor.place.Place;
+import themanor.thing.item.Item;
+import themanor.thing.creature.Creature;
+import themanor.thing.Thing;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
