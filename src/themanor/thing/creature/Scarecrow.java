@@ -6,12 +6,12 @@ import themanor.thing.Thing;
 
 public class Scarecrow extends Creature implements Attackable {
 
-    public Scarecrow() {
-        super(30, 5);
+    public Scarecrow(String name) {
+        super(name, 30, 5);
     }
 
-    public Scarecrow(Thing itemHidden) {
-        super(30, 5, itemHidden);
+    public Scarecrow(String name, Thing itemHidden) {
+        super(name, 30, 5, itemHidden);
     }
 
 

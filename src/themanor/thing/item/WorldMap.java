@@ -1,5 +1,6 @@
 package themanor.thing.item;
 
+import themanor.World;
 import themanor.interfaces.Takable;
 import themanor.thing.Thing;
 
@@ -9,25 +10,25 @@ import themanor.thing.Thing;
  */
 public class WorldMap extends Item implements Takable {
 
-    public WorldMap() {
-        super();
+    public WorldMap(String name) {
+        super(name);
     }
 
-    public WorldMap(Thing itemHidden) {
-        super(itemHidden);
+    public WorldMap(String name, Thing itemHidden) {
+        super(name, itemHidden);
     }
 
     @Override
-    public void use() {
+    public void use(World w) {
         System.out.print("     -----------------------------------------\n"+
 "       |Lake                           Fountain|\n"+
 "       |               Garden                  |\n"+
 "       |                                       |\n"+
 "---------------||-------------------------||----\n"+
 "|      |               |           |           |\n"+
-"|      |Loundge        |   ???	   |   Garage  |\n"+
+"|      |Loundge        |   ???     |   Garage  |\n"+
 "|      |               |           |           |\n"+
-"|Store--------||-------------------|------------\n"+
+"|Store-|-------||------------------|------------\n"+
 "|  room|               |child_bed- |adult_bed  |\n"+
 "|      =   Livingroom  =     room  =     room  |\n"+
 "|      |               |           |           |\n"+

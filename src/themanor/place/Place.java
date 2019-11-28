@@ -21,7 +21,9 @@ public abstract class Place {
 
 	public Place(String name) {
             //this.listThing = new ArrayList<>();
-            this.NAME=name;
+            if (name == null){
+                this.NAME="room";
+            } else this.NAME=name;
             this.EXITS = new LinkedHashMap<>();
             this.things = new Hashtable<>();
 	}
@@ -31,9 +33,8 @@ public abstract class Place {
         }
 
 
-	public void addThing(String name, Thing item) {
-            //this.listThing.add(item);
-            this.things.put(name, item);
+	public void addThing(Thing item) {
+            this.things.put(item.getName(), item);
 	}
         
         public void addExit(String name, Exit sortie){

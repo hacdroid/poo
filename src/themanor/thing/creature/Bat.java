@@ -6,12 +6,12 @@ import themanor.thing.Thing;
 
 public class Bat extends Creature implements Attackable {
     
-    public Bat(){
-        super(10, 1);
+    public Bat(String name){
+        super(name, 10, 1);
     }
     
-    public Bat(Thing itemHidden) {
-        super(10, 1, itemHidden);
+    public Bat(String name, Thing itemHidden) {
+        super(name, 10, 1, itemHidden);
     }
     
     

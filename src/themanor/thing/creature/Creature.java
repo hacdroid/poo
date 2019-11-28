@@ -7,14 +7,14 @@ public abstract class Creature extends Thing {
     protected int hp;
     protected final int DAMAGE;
     
-    public Creature(int hp, int damage) {
-        super();
+    public Creature(String name, int hp, int damage) {
+        super(name);
         this.hp = hp;
         this.DAMAGE = damage;
     }
 
-    public Creature(int hp, int damage , Thing itemHidden) {
-        super(itemHidden);
+    public Creature(String name, int hp, int damage , Thing itemHidden) {
+        super(name, itemHidden);
         this.hp = hp;
         this.DAMAGE=damage;
     }

@@ -1,15 +1,29 @@
 package themanor.thing;
 
 public abstract class Thing {
-    private Thing itemHide;
+    private final String NAME;
+    private final Thing ITEMHIDE;
 
-    public Thing() {
-        this.itemHide=null;
+    public Thing(String name) {
+        this.ITEMHIDE=null;
+        this.NAME=name;
     }
         
-    public Thing(Thing itemHidden) {
-        this.itemHide=itemHidden;
+    public Thing(String name,Thing itemHidden) {
+        this.ITEMHIDE=itemHidden;
+        this.NAME=name;
     }
 
+    @Override
     public abstract String toString();
+    
+    public String getName(){
+        return this.NAME;
+    }
+
+    public Thing getItemHide() {
+        return ITEMHIDE;
+    }
+    
+    
 }

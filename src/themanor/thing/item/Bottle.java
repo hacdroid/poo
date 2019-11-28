@@ -1,12 +1,22 @@
 package themanor.thing.item;
 
+import themanor.World;
 import themanor.interfaces.Takable;
+import themanor.thing.Thing;
 
 public class Bottle extends Item implements Takable {
 
+    public Bottle(String name) {
+        super(name);
+    }
+
+    public Bottle(String name, Thing itemHidden) {
+        super(name, itemHidden);
+    }
+ 
     @Override
-    public void use() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void use(World w) {
+        System.out.println("There is nothing to do now.");
     }
 
     @Override

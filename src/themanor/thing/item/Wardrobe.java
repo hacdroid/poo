@@ -5,6 +5,7 @@
  */
 package themanor.thing.item;
 
+import themanor.World;
 import themanor.thing.Thing;
 
 /**
@@ -12,23 +13,45 @@ import themanor.thing.Thing;
  * @author alexa
  */
 public class Wardrobe extends Item {
+    private boolean lock = true;
     
-    public Wardrobe() {
-        super();
+    public Wardrobe(String name) {
+        super(name);
     }
 
-    public Wardrobe(Thing itemHidden) {
-        super(itemHidden);
+    public Wardrobe(String name, Thing itemHidden) {
+        super(name, itemHidden);
     }
+    
+
 
     @Override
-    public void use() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void use(World w) {
+        if (lock){
+            System.out.println("It seems to be electronically locked!");
+        } else {
+            System.out.println("There is the " + this.getItemHide().getName() + " into this wardrobe!");
+            w.getJOUEUR().getActualPlace().getThings().remove(this.getName());
+            w.getJOUEUR().getActualPlace().addThing(this.getItemHide());
+        }
+        
+        
+        
     }
 
     @Override
     public String toString() {
-        return("an electric wardrobe");
+        return("an electronic wardrobe");
     }
+
+    public void unlock() {
+        this.lock = false;
+    }
+    
+    public boolean isLocked(){
+        return this.lock;
+    }
+     
+    
     
 }

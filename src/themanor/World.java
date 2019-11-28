@@ -1,50 +1,17 @@
 package themanor;
 
-import themanor.thing.item.SpecialDoorSocle;
-import themanor.exit.SpecialDoor;
-import themanor.exit.LockedDoor;
-import themanor.exit.Door;
-import themanor.thing.creature.NPC;
-import themanor.place.Lunchroom;
-import themanor.place.Bedroom;
-import themanor.place.Bathroom;
-import themanor.place.Kitchen;
-import themanor.place.Garage;
-import themanor.place.Garden;
-import themanor.place.Hall;
-import themanor.place.Outside;
-import themanor.place.Office;
-import themanor.place.Reserve;
-import themanor.place.Loundge;
-import themanor.place.Livingroom;
-import themanor.place.Storeroom;
-import themanor.place.Place;
-import themanor.thing.item.Torch;
-import themanor.thing.item.Detergent;
-import themanor.thing.item.Fountain;
-import themanor.thing.item.Stick;
-import themanor.thing.item.Goldring;
-import themanor.thing.item.Wire;
-import themanor.thing.item.Key;
-import themanor.thing.item.Dust;
-import themanor.thing.item.Electricmeter;
-import themanor.thing.item.Bread;
-import themanor.thing.item.Plants;
-import themanor.thing.item.Wardrobe;
-import themanor.thing.item.WorldMap;
-import themanor.thing.item.Bottle;
-import themanor.thing.item.Chair;
-import themanor.thing.item.Computer;
-import themanor.thing.item.PoisonedLake;
-import themanor.thing.item.Broom;
-import themanor.thing.creature.Scarecrow;
-import themanor.thing.creature.Bat;
+import themanor.thing.item.NPC;
+import themanor.exit.*;
+import themanor.thing.creature.*;
+import themanor.place.*;
+import themanor.thing.item.*;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Map;
 import java.util.stream.Stream;
+import themanor.thing.*;
 
 public class World {
 
@@ -65,6 +32,9 @@ public class World {
      * Méthode d'intialisation des lieux, 
      */
     private void initGame(){
+        /*
+        Initialisation des places
+        */
         Place hall = new Hall("hall");
         Place office = new Office("office");
         Place bathroom = new Bathroom("bathroom");
@@ -80,83 +50,58 @@ public class World {
         Place garden = new Garden("garden");
         Place outside = new Outside("outside");
         
-         /*
-        Initialisation des sorties
+        /*
+        Initialisation des différentes sorties
         */       
         hall.addExit("outside", new LockedDoor(outside,4));
         hall.addExit("office", new Door(office));
         hall.addExit("livingroom", new Door(livingroom));
         hall.addExit("lunchroom", new Door(lunchroom));
-
         office.addExit("bathroom", new LockedDoor(bathroom,3));
         office.addExit("livingroom", new Door(livingroom));
         office.addExit("hall", new Door(hall));
-
         bathroom.addExit("office", new Door(office));
-        
         lunchroom.addExit("hall", new Door(hall));
         lunchroom.addExit("kitchen", new Door(kitchen));
-
         kitchen.addExit("lunchroom", new Door(lunchroom));
-        
         storeroom.addExit("livingroom", new Door(livingroom));
-        
         livingroom.addExit("hall", new Door(hall));
         livingroom.addExit("office", new Door(office));
         livingroom.addExit("storeroom", new Door(storeroom));
         livingroom.addExit("loundge", new LockedDoor(loundge,2));
         livingroom.addExit("child_bedroom", new Door(childbedroom));
-        
         childbedroom.addExit("livingroom", new Door(livingroom));
         childbedroom.addExit("reserve", new SpecialDoor(reserve));
         childbedroom.addExit("adult_bedroom", new LockedDoor(adultbedroom,5));
-        
         adultbedroom.addExit("child_bedroom", new Door(childbedroom));
-        
         loundge.addExit("livingroom", new Door(livingroom));
         loundge.addExit("garden", new Door(garden));
-        
         reserve.addExit("child_bedroom", new Door(childbedroom));
-        
         garage.addExit("garden", new Door(garden));
-        
         garden.addExit("garage", new LockedDoor(garage,1));
         garden.addExit("loundge", new Door(loundge));
-        
-        
+         
         /*
-        Initialisation des items et créatures
+        Initialisation des things
         */
-        hall.addThing("bread",new Bread());
-        hall.addThing("broom",new Broom());
-        
-        office.addThing("man",new NPC(new Key(1))); //bottle d'eau contre clé
-        
-        bathroom.addThing("detergent",new Detergent());
-        
-        lunchroom.addThing("chair",new Chair(new Stick()));
-        lunchroom.addThing("wardrobe",new Wardrobe(new Key(5)));
-        
-        kitchen.addThing("bottle",new Bottle());
-       
-        storeroom.addThing("bat",new Bat(new Electricmeter(new Key(3))));
-        
-        livingroom.addThing("computer",new Computer(lunchroom.getThings().get(1))); //CONNAIT L'ARMOIRE
-        
-        childbedroom.addThing("dust",new Dust(new Key(2)));
-        childbedroom.addThing("socle",new SpecialDoorSocle(childbedroom.getExits().get(1))); //AJOUTER SPECIAL DOOR
-        
-        adultbedroom.addThing("plants",new Plants(new Wire())); 
-        
-        loundge.addThing("oldMap",new WorldMap());
-        
-        reserve.addThing("key",new Key(4));
-  
-        garage.addThing("torch",new Torch());
-        
-        garden.addThing("scarecrow",new Scarecrow(new Fountain()));
-        garden.addThing("poisoned_lake",new PoisonedLake(new Goldring()));
-        
+        hall.addThing(new Bread("bread"));
+        hall.addThing(new Broom("broom"));
+        office.addThing(new NPC("man", new Key("key1",1)));
+        bathroom.addThing(new Detergent("detergent"));
+        lunchroom.addThing(new Chair("chair", new Stick("stick")));
+        lunchroom.addThing(new Wardrobe("wardrobe", new Key("key5",5)));
+        kitchen.addThing(new Bottle("bottle"));
+        storeroom.addThing(new Bat("bat", new Electricmeter("electricmeter", new Key("key3",3))));
+        livingroom.addThing(new Computer("computer", lunchroom.getThings().get("wardrobe")));
+        childbedroom.addThing(new Dust("dust",new Key("key2",2)));
+        childbedroom.addThing(new SpecialDoorSocle("socle", childbedroom.getExits().get("reserve")));  
+        adultbedroom.addThing(new Plants("plants",new Wire("wire"))); 
+        loundge.addThing(new WorldMap("oldMap"));
+        reserve.addThing(new Key("key4",4));
+        garage.addThing(new Torch("torch"));
+        garden.addThing(new Scarecrow("scarecrow",new Fountain("fountain")));
+        garden.addThing(new PoisonedLake("poisoned_lake",new Goldring("goldring")));
+
         
         /*
         Memorisation des différents lieux du jeu avec leurs attributs
@@ -211,5 +156,10 @@ public class World {
         return LISTEPLACES;
     }    
 
+    public Player getJOUEUR() {
+        return JOUEUR;
+    }
+
+    
 
 }

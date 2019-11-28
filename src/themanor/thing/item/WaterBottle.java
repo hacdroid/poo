@@ -1,8 +1,20 @@
 package themanor.thing.item;
 
+import themanor.World;
+import themanor.thing.Thing;
 import themanor.thing.item.Bottle;
 
 public class WaterBottle extends Bottle {
+
+    public WaterBottle(String name) {
+        super(name);
+    }
+
+    public WaterBottle(String name, Thing itemHidden) {
+        super(name, itemHidden);
+    }
+    
+    
     
     @Override
     public String toString() {
@@ -10,7 +22,7 @@ public class WaterBottle extends Bottle {
     }
     
     @Override
-    public void use() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void use(World w) {
+        System.out.println("Do not drink it, it is not for you!");
     }
 }

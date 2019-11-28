@@ -1,21 +1,22 @@
 package themanor.thing.item;
 
+import themanor.World;
 import themanor.thing.Thing;
 
 public class Dust extends Item {
 
-    public Dust() {
-        super();
+    public Dust(String name) {
+        super(name);
     }
-    
 
-    public Dust(Thing itemHidden) {
-        super(itemHidden);
+    public Dust(String name, Thing itemHidden) {
+        super(name, itemHidden);
     }
+
 
     @Override
-    public void use() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void use(World w) {
+        System.out.println("How could you use dust ?");
     }
 
     @Override

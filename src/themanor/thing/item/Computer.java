@@ -5,23 +5,28 @@
  */
 package themanor.thing.item;
 
+import themanor.World;
 import themanor.thing.Thing;
 
-/**
- *
- * @author alexa
- */
-public class Computer extends Item {
-    private final Thing LOCKEDITEM;
 
-    public Computer(Thing lockedItem) {
-        super();
-        this.LOCKEDITEM=lockedItem;
+public class Computer extends Item {
+
+    public Computer(String name) {
+        super(name);
+    }
+    
+    public Computer(String name, Thing linkedItem) {
+        super(name,linkedItem);
     }
 
     @Override
-    public void use() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void use(World w) {
+        if (((Wardrobe)super.getItemHide()).isLocked()){
+            ((Wardrobe)super.getItemHide()).unlock();
+            System.out.println("You have unlocked something that was electronically locked!");
+        } else {
+            System.out.println("You have already done that!");
+        }
     }
 
     @Override
