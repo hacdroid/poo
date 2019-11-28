@@ -4,13 +4,13 @@ package themanor;
  *
  * @author alexa
  */
-public class gameMap extends Item {
+public class WorldMap extends Item implements Takable {
 
-    public gameMap() {
+    public WorldMap() {
         super();
     }
 
-    public gameMap(Thing itemHidden) {
+    public WorldMap(Thing itemHidden) {
         super(itemHidden);
     }
 

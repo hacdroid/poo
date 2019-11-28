@@ -1,6 +1,6 @@
 package themanor;
 
-public class Detergent extends Item {
+public class Detergent extends Item implements Takable {
 
     @Override
     public void use() {
