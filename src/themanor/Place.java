@@ -62,34 +62,35 @@ public abstract class Place {
 
         
         
-        public String toStringComplete(){
+        
+        
+        public String toStringComplete()
+        {
             String desc = "the " 
                     + this.getName() 
                     + "!\n\nThere, you can see "
                     + this.getExits().size() 
                     + " exit(s) :\n";
             
-
-            for (String key : this.EXITS.keySet()){
+            for (String key : this.EXITS.keySet())
+            {
                 desc = desc.concat("- " 
                         + this.EXITS.get(key).toString()
                         + "\n");
             }
-            
-            
-            if (!this.things.isEmpty()){
+            if (!this.things.isEmpty())
+            {  
                 desc = desc.concat("\nAnd also " 
                         + this.things.size() 
                         + " entities :\n");
                 
-                for (String key : this.things.keySet()){
+                for (String key : this.things.keySet())
+                {
                     desc = desc.concat("- " 
                             + this.things.get(key).toString()
                             + "\n");
                 }
- 
             }
-            
             return desc;
         }
 }

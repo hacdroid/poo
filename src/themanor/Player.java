@@ -110,7 +110,7 @@ public class Player {
                     break;
                     
                 case TAKE:
-                    this.takeCommand(ls);
+                    this.takeCommand(ls.size(),ls);
                     break;
                     
                 case QUIT:
@@ -158,6 +158,8 @@ public class Player {
         }
         
         
+        
+        
         private void lookCommand(int nbArgs, List<String> ls){
             Map<String,Thing> actualThings = this.actualPlace.getThings(); 
             
@@ -176,24 +178,34 @@ public class Player {
         }
         
         
-        private void takeCommand(List<String> ls){
+        
+        
+        private void takeCommand(int nbArgs, List<String> ls)
+        {
             Map<String,Thing> actualThings = this.actualPlace.getThings();
-            
-            if (actualThings.containsKey(ls.get(0))){        //SI C TAKABLE
-                        
-                this.inventory.add((Item)actualThings.get(ls.get(0)));
-                System.out.println("You take "
-                        + this.inventory.get(this.inventory.size()-1));
+            if (nbArgs>0){
+                if (actualThings.containsKey(ls.get(0))){    
+                    if (Takable.class.isAssignableFrom(actualThings.get(ls.get(0)).getClass())){
+                        this.inventory.add((Item)actualThings.get(ls.get(0)));
+                        System.out.println("You take "
+                                + this.inventory.get(this.inventory.size()-1));
 
-                this.actualPlace.getThings().remove(ls.get(0));
-            } 
+                        this.actualPlace.getThings().remove(ls.get(0));
+                    } else System.out.println("You cannot take this!");   
+                } else System.out.println("It does not exist.");
+            } else System.out.println("You cannot take nothing.");
         }
+        
+        
         
         
         private void quitCommand(){
             this.hp=0;
             System.out.println("You quit the game, bye!\n");
         }
+        
+        
+        
         
         
         private void useCommand(int nbArgs, List<String> ls){
