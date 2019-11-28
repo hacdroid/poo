@@ -1,7 +1,6 @@
 package themanor;
 
 public abstract class Exit {
-
 	private Place place;
         private boolean isOpen;
         

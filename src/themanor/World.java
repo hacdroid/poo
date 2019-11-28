@@ -164,8 +164,8 @@ public class World {
             System.out.println("YOU LOOSE : GAME OVER!");
         } else if(this.JOUEUR.getActualPlace().equals(this.LISTEPLACES.get("outside"))) {
             System.out.println("YOU WIN!");
-        }
-
+        }        
+        
     }
 
     public Map<String, Place> getLISTEPLACES() {
