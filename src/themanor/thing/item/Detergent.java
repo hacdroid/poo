@@ -15,13 +15,6 @@ public class Detergent extends Item implements Takable {
         super(name, itemHidden);
     }
 
-    
-    
-    @Override
-    public void use(World w) {
-        System.out.println("You cannot drink detergent! Are you crazy?");
-    }
-
     @Override
     public String toString() {
         return("a detergent bottle of a brand that does not even exist anymore");

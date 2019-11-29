@@ -2,7 +2,6 @@ package themanor;
 
 import themanor.exit.Exit;
 import themanor.interfaces.Takable;
-import themanor.interfaces.Attackable;
 import themanor.place.Place;
 import themanor.thing.item.Item;
 import themanor.thing.creature.Creature;
@@ -44,14 +43,11 @@ public class Player {
      */
     public void attacked(int damage) {
         this.hp -= damage;
-        if (!this.getIsOut()){
-            System.out.println("Il vous reste" + this.hp +
-                    " point(s) de vie");
-        }
     }
 
-    public void attack(Attackable monstre, int damage){
+    public void attack(Creature monstre, int damage){
         monstre.attacked(this, damage);
+        
 
     }
 
@@ -171,17 +167,14 @@ public class Player {
         if (nbArgs>0){
             if (actualThings.containsKey(ls.get(0))){        
                 System.out.println("It is a " + actualThings.get(ls.get(0)));
-                //VERIFIE SIL EST TAKABLE
             }
         } else {
-            if (actualThings.size()!=0){
+            
                 System.out.print("You are into ");
                 System.out.println(this.actualPlace.toStringComplete());
-
-            } else System.out.println("There is nothing there."); 
+           
         }
     }
-    //NE FONCTIONNE PAS SIL NY A PAS DITEM!
 
 
 
@@ -203,13 +196,10 @@ public class Player {
 
 
 
-
     private void quitCommand(){
         this.hp=0;
         System.out.println("You quit the game, bye!\n");
     }
-
-
 
 
     private void useCommand(int nbArgs, List<String> ls){
@@ -221,13 +211,13 @@ public class Player {
             if (this.inventory.containsKey(ls.get(0))){ 
                 if (nbArgs>1){ 
                     if (actualItems.containsKey(ls.get(1))) {
-                        //item.use(item)
+                        this.inventory.get(ls.get(0)).use(this.WORLD,actualItems.get(ls.get(1)));
                     }
                     else if (actualCreature.containsKey(ls.get(1))) {
-                        //item.use(creature)
+                        this.inventory.get(ls.get(0)).use(this.WORLD,actualCreature.get(ls.get(1)));
                     }
-                    else if (ls.get(0).contains("key") && actualExits.containsKey(ls.get(1)) ){
-                        //key.use(actualExits,ls.get(1))
+                    else if (actualExits.containsKey(ls.get(1))){
+                        this.inventory.get(ls.get(0)).use(this.WORLD,actualExits.get(ls.get(1)));
                     } else System.out.println("Second argument is not valid.");
 
                 } else this.inventory.get(ls.get(0)).use(this.WORLD);
@@ -240,10 +230,6 @@ public class Player {
             else System.out.println("First argument is not an item in your inventory.");
 
         } else System.out.println("You cannot use void.");
-
-
-
-
 
     }
 

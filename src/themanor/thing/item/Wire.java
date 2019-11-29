@@ -16,11 +16,6 @@ public class Wire extends Item implements Takable {
     }
 
     @Override
-    public void use(World w) {
-        System.out.println("Do not play with it, you will break the wire...");
-    }
-
-    @Override
     public String toString() {
         return("a long solid wire");
     }

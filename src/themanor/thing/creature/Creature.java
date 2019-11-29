@@ -1,5 +1,6 @@
 package themanor.thing.creature;
 
+import themanor.Player;
 import themanor.thing.Thing;
 
 public abstract class Creature extends Thing {
@@ -28,6 +29,18 @@ public abstract class Creature extends Thing {
         return this.hp;
     }
     
+        
+    public void attacked(Player player, int damage_taken){
+        if (!this.getIsOut())
+        {
+            this.hp -= damage_taken;
+        }
+    }
     
+    public void attack(Player player){
+        player.attacked(DAMAGE);
+    }
+    
+    @Override
     public abstract String toString();
 }

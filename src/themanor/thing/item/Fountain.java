@@ -15,11 +15,6 @@ public class Fountain extends Item {
     }
 
     
-    
-    @Override
-    public void use(World w) {
-        System.out.println("You cannot use it this way.");
-    }
 
     @Override
     public String toString() {

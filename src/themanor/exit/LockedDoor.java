@@ -28,11 +28,15 @@ public class LockedDoor extends Exit {
     
     @Override
     public void open(){
-        System.out.println("ERROR CODE OPEN");
     }
     
-    public void open(int code){
-        if (this.CODE_KEY == code) super.open();
-        else System.out.println("Ce n'est pas la bonne clé !");
+    public boolean open(int code){
+        if (this.CODE_KEY == code){
+            super.open();
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

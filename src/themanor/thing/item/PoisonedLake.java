@@ -14,12 +14,6 @@ public class PoisonedLake extends Item {
     }
 
 
-
-    @Override
-    public void use(World w) {
-        System.out.println("You cannot use the poisoned lake water!");
-    }
-
     @Override
     public String toString() {
         return("a lake full of muddy water, something shiny is at the bottom");

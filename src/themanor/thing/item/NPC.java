@@ -22,7 +22,7 @@ public class NPC extends Item {
 
     @Override
     public void use(World w) {
-        System.out.println("You talk to the friendly man. He is so thirsty...\nHe will give anything to have water.");
+        System.out.println("You talk to the friendly man. He is so thirsty...\nHe will give anything to have a water bottle.");
     }
     
 

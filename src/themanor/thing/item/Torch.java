@@ -19,7 +19,7 @@ public class Torch extends Item implements Takable {
     
     @Override
     public void use(World w) {
-        System.out.println("You are using the torch on your head.");
+        System.out.println("You already are using the torch.");
     }
 
     @Override

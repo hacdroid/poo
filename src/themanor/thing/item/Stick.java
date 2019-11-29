@@ -16,11 +16,6 @@ public class Stick extends Item implements Takable {
     }
  
     @Override
-    public void use(World w) {
-        System.out.println("You hurt your head with the stick, pay attention!");
-    }
-
-    @Override
     public String toString() {
         return("a long stick");
     }

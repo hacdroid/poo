@@ -15,11 +15,6 @@ public class Dust extends Item {
 
 
     @Override
-    public void use(World w) {
-        System.out.println("How could you use dust ?");
-    }
-
-    @Override
     public String toString() {
         return("a huge pile of dust");
     }

@@ -15,12 +15,6 @@ public class Goldring extends Item implements Takable {
         super(name, itemHidden);
     }
 
-    
-    
-    @Override
-    public void use(World w) {
-        System.out.println("You cannot use it this way.");
-    }
 
     @Override
     public String toString() {

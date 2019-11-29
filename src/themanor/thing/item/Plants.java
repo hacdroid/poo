@@ -13,15 +13,11 @@ public class Plants extends Item{
         super(name, itemHidden);
     }
 
-
     @Override
     public String toString() {
         return "There are plants that prevent you to move forward.";
     }
     
-    public void use(World w) {
-        System.out.println("You cannot use the plants.");
-    }
 
     
     

@@ -1,17 +1,16 @@
 package themanor.thing.creature;
 
-import themanor.interfaces.Attackable;
 import themanor.Player;
 import themanor.thing.Thing;
 
-public class Scarecrow extends Creature implements Attackable {
+public class Scarecrow extends Creature {
 
     public Scarecrow(String name) {
-        super(name, 30, 5);
+        super(name, 30, 6);
     }
 
     public Scarecrow(String name, Thing itemHidden) {
-        super(name, 30, 5, itemHidden);
+        super(name, 30, 6, itemHidden);
     }
 
 
@@ -21,20 +20,4 @@ public class Scarecrow extends Creature implements Attackable {
                 this.getHp() + " life points.";
     }
     
-    
-    public void attacked(Player player, int damage_taken){
-        if (!this.getIsOut())
-        {
-            this.hp -= damage_taken;
-            
-            if (!this.getIsOut())
-                this.attack(player, this.DAMAGE);
-            else System.out.println("VOUS AVEZ TUE LE MONSTRE");
-        }
-        else System.out.println("LE MONSTRE EST DEJA MORT");
-    }
-    
-    public void attack(Player player, int damage){
-        player.attacked(damage);
-    }
 }

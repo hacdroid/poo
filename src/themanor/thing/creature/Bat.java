@@ -1,17 +1,16 @@
 package themanor.thing.creature;
 
-import themanor.interfaces.Attackable;
 import themanor.Player;
 import themanor.thing.Thing;
 
-public class Bat extends Creature implements Attackable {
+public class Bat extends Creature {
     
     public Bat(String name){
-        super(name, 10, 1);
+        super(name, 11, 3);
     }
     
     public Bat(String name, Thing itemHidden) {
-        super(name, 10, 1, itemHidden);
+        super(name, 11, 3, itemHidden);
     }
     
     
@@ -21,20 +20,5 @@ public class Bat extends Creature implements Attackable {
                 this.getHp() + " life point.";
     }
     
-    
-    public void attacked(Player player, int damage_taken){
-        if (!this.getIsOut())
-        {
-            this.hp -= damage_taken;
-            
-            if (!this.getIsOut())
-                this.attack(player, this.DAMAGE);
-            else System.out.println("VOUS AVEZ TUE LE MONSTRE");
-        }
-        else System.out.println("LE MONSTRE EST DEJA MORT");
-    }
-    
-    public void attack(Player player, int damage){
-        player.attacked(damage);
-    }
+
 }
