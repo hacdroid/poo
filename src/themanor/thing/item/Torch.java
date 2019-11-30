@@ -8,11 +8,11 @@ import themanor.thing.item.Item;
 public class Torch extends Item implements Takable {
 
     public Torch(String name) {
-        super(name);
+        super(name,3);
     }
 
     public Torch(String name, Thing itemHidden) {
-        super(name, itemHidden);
+        super(name, itemHidden,3);
     }
     
     

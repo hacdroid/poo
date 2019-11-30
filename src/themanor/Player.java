@@ -12,15 +12,17 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import static themanor.Command.*;
 
 public class Player {
 
     private final String NAME;
-    private Map<String,Item> inventory;
+    private Map<String,Item> inventory = new LinkedHashMap<>();;
     private Command command;
-    private int hp;
+    private int hp = 20;
     private Place actualPlace;
     private final World WORLD;
+    private boolean inFigth = false;
 
     /**
      * 
@@ -28,8 +30,6 @@ public class Player {
      */
     public Player(String name, World w) {
             this.NAME=name;
-            this.hp=20;
-            this.inventory= new LinkedHashMap<>();
             this.WORLD=w;
     }
 
@@ -96,10 +96,12 @@ public class Player {
 
 
     public void executeCommand(List<String> ls) {
-
+        
+        
         switch(this.command){
             case GO:
-                this.goCommand(ls.size(), ls);
+                if (!this.inFigth) this.goCommand(ls.size(), ls);
+                else System.out.println("You cannot leave during fight!");
                 break;    
 
             case HELP :
@@ -111,7 +113,8 @@ public class Player {
                 break;
 
             case TAKE:
-                this.takeCommand(ls.size(),ls);
+                if (!this.inFigth) this.takeCommand(ls.size(),ls);
+                else System.out.println("You cannot take something during fight");
                 break;
 
             case QUIT:
@@ -130,6 +133,7 @@ public class Player {
                 System.err.println("SWITCH ERROR!");
         }
 
+
     }
 
 
@@ -139,8 +143,12 @@ public class Player {
 
         if (nbArgs>0){
             if (actualOpenExits.containsKey(ls.get(0))){
+                if("storeroom".equals(ls.get(0)) && !this.inventory.containsKey("torch")){
+                    System.out.println("The room is to dark... You cannot go there...");
+                }else {
                 this.actualPlace = actualExits.get(ls.get(0)).getPlace();
-                System.out.println("You are going to a " + this.actualPlace.getName() + "!\n");
+                System.out.println("You are going to the " + this.actualPlace.getName() + "!\n");
+                }
             }
             else if (actualExits.containsKey(ls.get(0))) System.out.println("This door seems locked! You cannot go there.");
             else if (this.actualPlace.getName().equals(ls.get(0))) System.out.println("You already are into this place!");
@@ -213,6 +221,9 @@ public class Player {
                     if (actualItems.containsKey(ls.get(1))) {
                         this.inventory.get(ls.get(0)).use(this.WORLD,actualItems.get(ls.get(1)));
                     }
+                    else if (this.inventory.containsKey(ls.get(1))) {
+                        this.inventory.get(ls.get(0)).use(this.WORLD,this.inventory.get(ls.get(1)));
+                    }
                     else if (actualCreature.containsKey(ls.get(1))) {
                         this.inventory.get(ls.get(0)).use(this.WORLD,actualCreature.get(ls.get(1)));
                     }
@@ -255,10 +266,14 @@ public class Player {
     public int getHp() {
         return hp;
     }
-        
-    
-    
-        
-        
+
+    public void setFigth(boolean inFigth) {
+        this.inFigth = inFigth;
+    }
+
+    public boolean isInFigth() {
+        return inFigth;
+    }
+     
         
 }

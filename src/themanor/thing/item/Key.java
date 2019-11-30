@@ -10,7 +10,7 @@ public class Key extends Item implements Takable {
     private final int CODE; //ON A DECIDE D'UTILISER UN SYSTEME DE CODE AVEC LES PORTES
     
     public Key(String name, int code) {
-        super(name);
+        super(name,4);
         this.CODE=code;
     }
 
@@ -24,7 +24,7 @@ public class Key extends Item implements Takable {
         if (e instanceof LockedDoor){
             if (!((LockedDoor)e).isOpen()){
                 if(((LockedDoor) e).open(CODE)){
-                    System.out.println("You opened the door!\nNow, you can go to " + e.getPlace().getName());
+                    System.out.println("You opened the door!\nNow, you can go to the " + e.getPlace().getName());
                     w.getJOUEUR().getInventory().remove(this.getName());
                 } else{
                     System.out.println("You did not use the right key to open this door...");

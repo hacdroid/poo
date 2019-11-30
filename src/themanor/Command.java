@@ -8,6 +8,7 @@ public enum Command {
         QUIT("QUIT : Quit the game.\nUse : QUIT\n"),
         USE("USE : Use an object, or use an object on something.\nUses : USE bread, USE key1 door\n"),
         INVENTORY("INVENTORY : display your inventory.\nUse : INVENTORY\n");
+        
 
 	private String desc;
 

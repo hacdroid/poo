@@ -7,11 +7,11 @@ import themanor.thing.Thing;
 public class Bottle extends Item implements Takable {
 
     public Bottle(String name) {
-        super(name);
+        super(name,1);
     }
 
     public Bottle(String name, Thing itemHidden) {
-        super(name, itemHidden);
+        super(name, itemHidden,1);
     }
  
     

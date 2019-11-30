@@ -7,11 +7,11 @@ import themanor.thing.Thing;
 public class Bread extends Item implements Takable{
 
     public Bread(String name) {
-        super(name);
+        super(name,2);
     }
 
     public Bread(String name, Thing itemHidden) {
-        super(name, itemHidden);
+        super(name, itemHidden,2);
     }
 
     @Override

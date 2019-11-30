@@ -16,6 +16,7 @@ public class PoisonedLake extends Item {
 
     @Override
     public String toString() {
-        return("a lake full of muddy water, something shiny is at the bottom");
+        if (this.getItemHide()!=null) return("a lake full of muddy water, something is shining...");
+        else return ("a lake full of muddy water");
     }
 }

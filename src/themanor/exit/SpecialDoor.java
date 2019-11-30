@@ -15,16 +15,16 @@ public class SpecialDoor extends Exit {
     public String toString() {
         String etat;
         
-        if (this.isOpen()) etat = "ouverte, elle mène à " +
+        if (this.isOpen()) etat = "opened door, it leads to the " +
                 this.getPlace().toString();
-        else etat = "fermée et semble liée a un socle";
+        else etat = "closed door... It seems to be linked to a socle";
         
-        return "Une porte étrange est " + etat + ".";
+        return "A strange " + etat + ".";
     }
     
     @Override
     public void open(){
         System.out.println("LA PORTE S'OUVRE AVEC LE GOLD RING");
-        this.open();
+        super.open();
     }
 }

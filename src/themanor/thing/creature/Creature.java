@@ -6,18 +6,16 @@ import themanor.thing.Thing;
 public abstract class Creature extends Thing {
 
     protected int hp;
-    protected final int DAMAGE;
+    
     
     public Creature(String name, int hp, int damage) {
-        super(name);
+        super(name,damage);
         this.hp = hp;
-        this.DAMAGE = damage;
     }
 
     public Creature(String name, int hp, int damage , Thing itemHidden) {
-        super(name, itemHidden);
+        super(name, itemHidden,damage);
         this.hp = hp;
-        this.DAMAGE=damage;
     }
     
     
@@ -31,9 +29,11 @@ public abstract class Creature extends Thing {
     
         
     public void attacked(Player player, int damage_taken){
-        if (!this.getIsOut())
+        if (this.hp-damage_taken>=0)
         {
             this.hp -= damage_taken;
+        } else {
+            this.hp=0;
         }
     }
     

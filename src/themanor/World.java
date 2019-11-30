@@ -5,13 +5,10 @@ import themanor.exit.*;
 import themanor.thing.creature.*;
 import themanor.place.*;
 import themanor.thing.item.*;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Scanner;
 import java.util.Map;
-import java.util.stream.Stream;
-import themanor.thing.*;
+
 
 public class World {
 
@@ -95,11 +92,11 @@ public class World {
         livingroom.addThing(new Computer("computer", lunchroom.getThings().get("wardrobe")));
         childbedroom.addThing(new Dust("dust",new Key("key2",2)));
         childbedroom.addThing(new SpecialDoorSocle("socle", childbedroom.getExits().get("reserve")));  
-        adultbedroom.addThing(new Plants("plants",new Wire("wire"))); 
-        loundge.addThing(new WorldMap("oldMap"));
+        adultbedroom.addThing(new Plants("plants",new Wire("wire",new Fishingrod("fishingrod")))); 
+        loundge.addThing(new WorldMap("map"));
         reserve.addThing(new Key("key4",4));
         garage.addThing(new Torch("torch"));
-        garden.addThing(new Scarecrow("scarecrow",new Fountain("fountain")));
+        garden.addThing(new Scarecrow("scarecrow",new Fountain("fountain", new WaterBottle("waterbottle"))));
         garden.addThing(new PoisonedLake("poisoned_lake",new Goldring("goldring")));
 
         
@@ -140,7 +137,7 @@ public class World {
                 + "You are into the hall");
         
         
-        while(!this.JOUEUR.getIsOut()|| this.JOUEUR.getActualPlace().equals(this.LISTEPLACES.get("outside")))
+        while(!this.JOUEUR.getIsOut() && !this.JOUEUR.getActualPlace().equals(this.LISTEPLACES.get("outside")))
             this.JOUEUR.saisieCommand();
         
         

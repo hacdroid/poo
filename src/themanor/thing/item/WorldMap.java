@@ -11,11 +11,11 @@ import themanor.thing.Thing;
 public class WorldMap extends Item implements Takable {
 
     public WorldMap(String name) {
-        super(name);
+        super(name,1);
     }
 
     public WorldMap(String name, Thing itemHidden) {
-        super(name, itemHidden);
+        super(name, itemHidden,1);
     }
 
     @Override

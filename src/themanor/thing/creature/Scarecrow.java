@@ -6,11 +6,11 @@ import themanor.thing.Thing;
 public class Scarecrow extends Creature {
 
     public Scarecrow(String name) {
-        super(name, 30, 6);
+        super(name, 30, 7);
     }
 
     public Scarecrow(String name, Thing itemHidden) {
-        super(name, 30, 6, itemHidden);
+        super(name, 30, 7, itemHidden);
     }
 
 
