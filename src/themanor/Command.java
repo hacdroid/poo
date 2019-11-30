@@ -1,13 +1,13 @@
 package themanor;
 
 public enum Command {
-	GO("GO : Allows you to go where it is possible to.\nUse : GO office\n"),
-        HELP("HELP : Display the command list.\nUses : HELP / HELP GO\n"),
-        LOOK("LOOK : See what is around you, or a specifical thing.\nUses : LOOK / LOOK bread\n"),
-        TAKE("TAKE : Use it to harvest items.\nUse : TAKE bread\n"),
-        QUIT("QUIT : Quit the game.\nUse : QUIT\n"),
-        USE("USE : Use an object, or use an object on something.\nUses : USE bread, USE key1 door\n"),
-        INVENTORY("INVENTORY : display your inventory.\nUse : INVENTORY\n");
+	GO("GO : Allows you to go where it is possible to.\nGO office\n"),
+        HELP("HELP : Display the command list.\nHELP - HELP item - HELP exit\n"),
+        LOOK("LOOK : See what is around you, or a specifical thing.\nLOOK - LOOK bread\n"),
+        TAKE("TAKE : Use it to harvest items.\nTAKE bread\n"),
+        QUIT("QUIT : Quit the game.\nQUIT\n"),
+        USE("USE : Use an object, or use an object on something.\nUSE bread - USE key1 hall\n"),
+        INVENTORY("INVENTORY : display your inventory.\nINVENTORY\n");
         
 
 	private String desc;

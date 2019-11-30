@@ -20,7 +20,7 @@ public class Player {
     private Map<String,Item> inventory = new LinkedHashMap<>();;
     private Command command;
     private int hp = 20;
-    private Place actualPlace;
+    private Place currentPlace;
     private final World WORLD;
     private boolean inFigth = false;
 
@@ -52,11 +52,11 @@ public class Player {
     }
 
     public void setActualPlace(Place lieu){
-        this.actualPlace=lieu;
+        this.currentPlace=lieu;
     }
 
     public Place getActualPlace(){
-        return this.actualPlace;
+        return this.currentPlace;
     }
 
     public String getName(){
@@ -105,7 +105,7 @@ public class Player {
                 break;    
 
             case HELP :
-                this.helpCommand();
+                this.helpCommand(ls.size(),ls);
                 break;
 
             case LOOK:
@@ -138,20 +138,20 @@ public class Player {
 
 
     private void goCommand(int nbArgs, List<String> ls){
-        Map<String,Exit> actualExits = this.actualPlace.getExits();
-        Map<String,Exit> actualOpenExits = this.actualPlace.getOpenExits();
+        Map<String,Exit> currentExits = this.currentPlace.getExits();
+        Map<String,Exit> currentOpenExits = this.currentPlace.getOpenExits();
 
         if (nbArgs>0){
-            if (actualOpenExits.containsKey(ls.get(0))){
+            if (currentOpenExits.containsKey(ls.get(0))){
                 if("storeroom".equals(ls.get(0)) && !this.inventory.containsKey("torch")){
                     System.out.println("The room is to dark... You cannot go there...");
                 }else {
-                this.actualPlace = actualExits.get(ls.get(0)).getPlace();
-                System.out.println("You are going to the " + this.actualPlace.getName() + "!\n");
+                this.currentPlace = currentExits.get(ls.get(0)).getPlace();
+                System.out.println("You are going to the " + this.currentPlace.getName() + "!\n");
                 }
             }
-            else if (actualExits.containsKey(ls.get(0))) System.out.println("This door seems locked! You cannot go there.");
-            else if (this.actualPlace.getName().equals(ls.get(0))) System.out.println("You already are into this place!");
+            else if (currentExits.containsKey(ls.get(0))) System.out.println("This door seems locked! You cannot go there.");
+            else if (this.currentPlace.getName().equals(ls.get(0))) System.out.println("You already are into this place!");
             else if (this.WORLD.getLISTEPLACES().containsKey(ls.get(0))) System.out.println("This place is too far away!");
             else System.out.println("This place doesn't exist!");
         } else {
@@ -160,9 +160,30 @@ public class Player {
     }
 
 
-    private void helpCommand(){
-        for (int i = 0; i<Command.values().length;i++){
-            Command.values()[i].display();
+    private void helpCommand(int nbArgs, List<String> ls){
+        Map<String,Exit> currentExits = this.currentPlace.getExits();
+        Map<String,Thing> currentThings = this.currentPlace.getThings(); 
+        
+        if (nbArgs>0){
+            System.out.println("Code names :");
+            if (ls.get(0).equals("item") || ls.get(0).equals("items")) {
+                currentThings.forEach((k,v) ->{
+                    System.out.println(k);
+                });  
+            }
+            else if (ls.get(0).equals("exit") || ls.get(0).equals("exits"))
+                currentExits.forEach((k,v) ->{
+                    System.out.println(k);
+                });  
+            else {
+                for (int i = 0; i<Command.values().length;i++){
+                    Command.values()[i].display();
+                }
+            }
+        } else {
+            for (int i = 0; i<Command.values().length;i++){
+                Command.values()[i].display();
+            }
         }
     }
 
@@ -170,16 +191,16 @@ public class Player {
 
 
     private void lookCommand(int nbArgs, List<String> ls){
-        Map<String,Thing> actualThings = this.actualPlace.getThings(); 
+        Map<String,Thing> currentThings = this.currentPlace.getThings(); 
 
         if (nbArgs>0){
-            if (actualThings.containsKey(ls.get(0))){        
-                System.out.println("It is a " + actualThings.get(ls.get(0)));
+            if (currentThings.containsKey(ls.get(0))){        
+                System.out.println("It is a " + currentThings.get(ls.get(0)));
             }
         } else {
             
                 System.out.print("You are into ");
-                System.out.println(this.actualPlace.toStringComplete());
+                System.out.println(this.currentPlace.toStringComplete());
            
         }
     }
@@ -188,15 +209,15 @@ public class Player {
 
     private void takeCommand(int nbArgs, List<String> ls)
     {
-        Map<String,Thing> actualThings = this.actualPlace.getThings();
+        Map<String,Thing> currentThings = this.currentPlace.getThings();
         if (nbArgs>0){
-            if (actualThings.containsKey(ls.get(0))){    
-                if (Takable.class.isAssignableFrom(actualThings.get(ls.get(0)).getClass())){
-                    this.inventory.put(ls.get(0),(Item)actualThings.get(ls.get(0)));
+            if (currentThings.containsKey(ls.get(0))){    
+                if (Takable.class.isAssignableFrom(currentThings.get(ls.get(0)).getClass())){
+                    this.inventory.put(ls.get(0),(Item)currentThings.get(ls.get(0)));
                     System.out.println("You take "
                             + this.inventory.get(ls.get(0)));
 
-                    this.actualPlace.getThings().remove(ls.get(0));
+                    this.currentPlace.getThings().remove(ls.get(0));
                 } else System.out.println("You cannot take this!");   
             } else System.out.println("It does not exist.");
         } else System.out.println("You cannot take nothing.");
@@ -211,31 +232,31 @@ public class Player {
 
 
     private void useCommand(int nbArgs, List<String> ls){
-        Map<String,Creature> actualCreature = this.actualPlace.getCreatures();
-        Map<String,Item> actualItems = this.actualPlace.getItems();
-        Map<String,Exit> actualExits = this.actualPlace.getExits();            
+        Map<String,Creature> currentCreature = this.currentPlace.getCreatures();
+        Map<String,Item> currentItems = this.currentPlace.getItems();
+        Map<String,Exit> currentExits = this.currentPlace.getExits();            
 
         if (nbArgs>0){
             if (this.inventory.containsKey(ls.get(0))){ 
                 if (nbArgs>1){ 
-                    if (actualItems.containsKey(ls.get(1))) {
-                        this.inventory.get(ls.get(0)).use(this.WORLD,actualItems.get(ls.get(1)));
+                    if (currentItems.containsKey(ls.get(1))) {
+                        this.inventory.get(ls.get(0)).use(this.WORLD,currentItems.get(ls.get(1)));
                     }
                     else if (this.inventory.containsKey(ls.get(1))) {
                         this.inventory.get(ls.get(0)).use(this.WORLD,this.inventory.get(ls.get(1)));
                     }
-                    else if (actualCreature.containsKey(ls.get(1))) {
-                        this.inventory.get(ls.get(0)).use(this.WORLD,actualCreature.get(ls.get(1)));
+                    else if (currentCreature.containsKey(ls.get(1))) {
+                        this.inventory.get(ls.get(0)).use(this.WORLD,currentCreature.get(ls.get(1)));
                     }
-                    else if (actualExits.containsKey(ls.get(1))){
-                        this.inventory.get(ls.get(0)).use(this.WORLD,actualExits.get(ls.get(1)));
+                    else if (currentExits.containsKey(ls.get(1))){
+                        this.inventory.get(ls.get(0)).use(this.WORLD,currentExits.get(ls.get(1)));
                     } else System.out.println("Second argument is not valid.");
 
                 } else this.inventory.get(ls.get(0)).use(this.WORLD);
 
-            } else if(actualItems.containsKey(ls.get(0)) 
-                    && !Takable.class.isAssignableFrom(actualItems.get(ls.get(0)).getClass())) {
-                actualItems.get(ls.get(0)).use(this.WORLD);
+            } else if(currentItems.containsKey(ls.get(0)) 
+                    && !Takable.class.isAssignableFrom(currentItems.get(ls.get(0)).getClass())) {
+                currentItems.get(ls.get(0)).use(this.WORLD);
             }
 
             else System.out.println("First argument is not an item in your inventory.");
@@ -247,6 +268,7 @@ public class Player {
 
 
     private void inventoryCommand(){
+        System.out.println("You have " + this.hp + " life points!\n");
         if(!inventory.isEmpty()){
             System.out.println("Your inventory : ");
             for (Item i : inventory.values()) System.out.println("- "+ i);           
