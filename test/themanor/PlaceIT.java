@@ -1,11 +1,10 @@
 package themanor;
 
-import java.util.LinkedHashMap;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import themanor.exit.Door;
+import themanor.exit.LockedDoor;
 import themanor.place.Place;
 import themanor.place.Hall;
 import themanor.place.Office;
@@ -21,11 +20,13 @@ public class PlaceIT {
     
     private Door d1;
     private Door d2;
+    private LockedDoor d3;
     
     private Thing t1;
     private Thing t2;
     private Thing t3;
 
+    
     @Before
     public void setUp() {
         p1 = new Hall("hall");
@@ -33,6 +34,7 @@ public class PlaceIT {
         
         d1 = new Door(p1);
         d2 = new Door(p2);
+        d3 = new LockedDoor(p2, 1234);
         
         t1 = new Bat("bat");
         t2 = new Bread("bread");
@@ -51,56 +53,54 @@ public class PlaceIT {
     
     
     @Test
-    public void addThingTest1(){
+    public void addThing_getThingsTest1(){
         p1.addThing(t1);
         assertTrue(p1.getThings().containsKey(t1.getName()));
-    }    
+    }
     @Test
-    public void addThingTest2(){
-        p1.addThing(t1);
-        assertTrue(p1.getCreatures().containsKey(t1.getName()));
-    }    
-    @Test
-    public void addThingTest3(){
-        p1.addThing(t1);
-        assertFalse(p1.getItems().containsKey(t1.getName()));
-    }    
-    @Test
-    public void addThingTest4(){
+    public void addThing_getThingsTest2(){
         p1.addThing(t2);
         assertTrue(p1.getThings().containsKey(t2.getName()));
-    }    
+    }
     @Test
-    public void addThingTest5(){
+    public void addThing_getThingsTest3(){
+        p1.addThing(t3);
+        assertTrue(p1.getThings().containsKey((t3.getName())));
+    }
+    
+    
+    @Test
+    public void addThing_getCreaturesTest1(){
+        p1.addThing(t1);
+        assertTrue(p1.getCreatures().containsKey(t1.getName()));
+    }
+    @Test
+    public void addThing_getCreaturesTest2(){
         p1.addThing(t2);
         assertFalse(p1.getCreatures().containsKey(t2.getName()));
-    }    
+    }
     @Test
-    public void addThingTest6(){
+    public void addThing_getCreaturesTest3(){
+        p1.addThing(t3);
+        assertFalse(p1.getCreatures().containsKey((t3.getName())));
+    }
+    
+    
+    @Test
+    public void addThing_getItemsTest1(){
+        p1.addThing(t1);
+        assertFalse(p1.getItems().containsKey(t1.getName()));
+    }
+    @Test
+    public void addThing_getItemsTest2(){
         p1.addThing(t2);
         assertTrue(p1.getItems().containsKey(t2.getName()));
     }
     @Test
-    public void addThingTest7(){
+    public void addThing_getItemsTest3(){
         p1.addThing(t3);
-        assertNotNull(p1.getThings().containsKey((t3.getName())));
-    }    
-    @Test
-    public void addThingTest8(){
-        p1.addThing(t3);
-        assertNotNull(p1.getThings().containsKey((t3.getName())));
-    }    
-    @Test
-    public void addThingTest9(){
-        p1.addThing(t3);
-        assertTrue(p1.getThings().containsKey((t3.getName())));
-    }    
-    /*
-    Dans addThing :
-        if (name = null)
-            name = "CE QUE TU VEUX" OU name = (string)item
-        this.things.put(name, item);
-    */
+        assertTrue(p1.getItems().containsKey((t3.getName())));
+    }
     
     
     @Test
@@ -110,15 +110,52 @@ public class PlaceIT {
     }
     @Test
     public void addExitTest2(){
-        p1.addExit(null, d2);
-        assertTrue(p1.getExits().containsKey(null));
+        p1.addExit(p2.getName(), d2);
+        assertTrue(p1.getExits().containsKey(p2.getName()));
     }
     
-    /*
+    
     @Test
-    public void getThingsTest1(){
-        p1.addThing("bat", t1);
-        assertTrue(p1.getThings().containsKey("bat"));
+    public void getThingsTest(){
+        assertTrue(p1.getThings().isEmpty());
     }
-*/
+    
+    
+    @Test
+    public void getCreaturesTest(){
+        assertTrue(p1.getCreatures().isEmpty());
+    }
+    
+    
+    @Test
+    public void getItemsTest(){
+        assertTrue(p1.getItems().isEmpty());
+    }
+    
+    
+    @Test
+    public void getExitsTest1(){
+        assertTrue(p1.getExits().isEmpty());
+    }
+    @Test
+    public void getExitsTest2(){
+        p1.addExit(p2.getName(), d2);
+        assertFalse(p1.getExits().isEmpty());
+    }
+    
+    
+    @Test
+    public void getOpenExitsTest1(){
+        assertTrue(p1.getOpenExits().isEmpty());
+    }
+    @Test
+    public void getOpenExitsTest2(){
+        p1.addExit(p2.getName(), d2);
+        assertFalse(p1.getOpenExits().isEmpty());
+    }
+    @Test
+    public void getOpenExitsTest3(){
+        p1.addExit(p2.getName(), d3);
+        assertTrue(p1.getOpenExits().isEmpty());
+    }
 }
