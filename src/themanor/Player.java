@@ -14,6 +14,13 @@ import java.util.Map;
 import java.util.Scanner;
 import static themanor.Command.*;
 
+
+/**
+ * <p>Un <b>joueur</b> est caractérisé par son nom, son inventaire, sa commande actuelle,
+ * ses points de vies, sa position et s'il est en combat ou non.</p>
+ * <p>Il connait aussi le monde dans lequel il évolu.</p>
+ * @author alexa
+ */
 public class Player {
 
     private final String NAME;
@@ -22,55 +29,93 @@ public class Player {
     private int hp = 20;
     private Place currentPlace;
     private final World WORLD;
-    private boolean inFigth = false;
+    private boolean inFight = false;
 
+    
     /**
-     * 
-     * @param name
+     * Constructeur du joueur
+     * @param name correspond au nom du joueur
+     * @param w permet au joueur de connaitre son monde
      */
     public Player(String name, World w) {
             this.NAME=name;
             this.WORLD=w;
     }
 
-
+    
+    /**
+     * Cette methode nous dit si le joueur est toujours en vie ou non
+     * @return 
+     */
     public boolean getIsOut(){
         return (this.hp <= 0);
     }
+    
+    
     /**
-     * 
-     * @param damage
+     * Cette méthode réduit la vie du joueur selon la force de
+     * l'attaque ennemi
+     * @param damage 
      */
     public void attacked(int damage) {
         this.hp -= damage;
     }
 
+    
+    /**
+     * Cette méthode d'attaque appelle une méthode de créature pour
+     * réduire la vie de l'ennemi selon les paramètres
+     * @param monstre est l'ennemi combattu
+     * @param damage correspond à la puissance de l'objet utilisé
+     */
     public void attack(Creature monstre, int damage){
         monstre.attacked(this, damage);
-        
-
     }
 
+    
+    /**
+     * Cette méthode permet de changer l'emplacement du joueur dans
+     * le jeu
+     * @param lieu correspond au nouvel emplacement du joueur
+     */
     public void setActualPlace(Place lieu){
         this.currentPlace=lieu;
     }
 
+    
+    /**
+     * Cette méthode permet de récupèrer l'emplacement actuel du joueur
+     * @return l'emplacement du joueur de type Place
+     */
     public Place getActualPlace(){
         return this.currentPlace;
     }
 
+    
+    /**
+     * Cette méthode permet de récupèrer le nom du joueur
+     * @return son nom de type String
+     */
     public String getName(){
         return this.NAME;
     }
 
 
-    public void saisieCommand() {
+    /**
+     * <p>Cette méthode récupère la <b>saisie clavier</b> du joueur
+     * Toutes les commandes tapées passent par cette méthode
+     * afin de vérifier que la commande saisie est valide.</p>
+     * <p>Les arguments sont vérifiés ultérieurement.</p>
+     * <p>On UpperCase la commande et LowerCase les argumentd
+     * car c'est la convention choisie</p>
+     * <p>Cette méthode n'est appelée que dans le package racine</p>
+     */
+    protected void saisieCommand() {
         if (!this.getIsOut()){
             Boolean isException = false;
             Scanner sc = new Scanner(System.in);
 
-
-            System.out.print("\n");
+            System.out.println("");
             String input = sc.nextLine();
             input = input.toLowerCase();
 
@@ -87,20 +132,21 @@ public class Player {
                 isException = true;
             }
 
-            if (!isException){
-                this.executeCommand(ls);
-            }
-
+            if (!isException) this.executeCommand(ls); 
         }
     }
 
 
-    public void executeCommand(List<String> ls) {
-        
-        
+    /**
+     * Cette méthode redirige la commande actuelle vers la méthode liée.
+     * Elle n'est appelé que par saisieCommand.
+     * @param ls correspond aux arguments qui seront nécessaires selon
+     * la commande demandée.
+     */
+    private void executeCommand(List<String> ls) {
         switch(this.command){
             case GO:
-                if (!this.inFigth) this.goCommand(ls.size(), ls);
+                if (!this.inFight) this.goCommand(ls.size(), ls);
                 else System.out.println("You cannot leave during fight!");
                 break;    
 
@@ -113,7 +159,7 @@ public class Player {
                 break;
 
             case TAKE:
-                if (!this.inFigth) this.takeCommand(ls.size(),ls);
+                if (!this.inFight) this.takeCommand(ls.size(),ls);
                 else System.out.println("You cannot take something during fight");
                 break;
 
@@ -132,11 +178,17 @@ public class Player {
             default:
                 System.err.println("SWITCH ERROR!");
         }
-
-
     }
 
 
+    /**
+     * <p>Cette méthode réagit à la saisie utilisateur <b>GO</b>
+     * Elle ne peut être appelée que par executeCommand.</p>
+     * <p>Go verifie que la sortie est bien voisine a la salle actuelle.
+     * Sinon elle retourne le bon message d'erreur.
+     * @param nbArgs corresponds aux nombres d'arguments donnés par le joueur
+     * @param ls corresponds aux arguments donnés par le joueur</p>
+     */
     private void goCommand(int nbArgs, List<String> ls){
         Map<String,Exit> currentExits = this.currentPlace.getExits();
         Map<String,Exit> currentOpenExits = this.currentPlace.getOpenExits();
@@ -159,7 +211,15 @@ public class Player {
         }
     }
 
-
+    /**
+     * <p>Cette méthode réagit à la saisie utilisateur <b>HELP</b>
+     * Elle ne peut être appelée que par executeCommand.</p>
+     * <p>Help donne les différentes utilisations des commandes.
+     * Elle donne aussi le nom des items ou endroits demandées
+     * pour éviter qu'un joueur soit bloqué.
+     * @param nbArgs corresponds aux nombres d'arguments donnés par le joueur
+     * @param ls corresponds aux arguments donnés par le joueur</p>
+     */
     private void helpCommand(int nbArgs, List<String> ls){
         Map<String,Exit> currentExits = this.currentPlace.getExits();
         Map<String,Thing> currentThings = this.currentPlace.getThings(); 
@@ -189,7 +249,14 @@ public class Player {
 
 
 
-
+    /**
+     * <p>Cette méthode réagit à la saisie utilisateur <b>LOOK</b>
+     * Elle ne peut être appelée que par executeCommand.</p>
+     * <p>Look affiche ce qu'il y a dans la salle
+     * ou juste la description d'un item spécifié
+     * @param nbArgs corresponds aux nombres d'arguments donnés par le joueur
+     * @param ls corresponds aux arguments donnés par le joueur</p>
+     */
     private void lookCommand(int nbArgs, List<String> ls){
         Map<String,Thing> currentThings = this.currentPlace.getThings(); 
 
@@ -206,7 +273,13 @@ public class Player {
     }
 
 
-
+    /**
+     * <p>Cette méthode réagit à la saisie utilisateur <b>TAKE</b>
+     * Elle ne peut être appelée que par executeCommand.</p>
+     * <p>Take permet au joueur de récupérer un item présent dans la salle.
+     * @param nbArgs corresponds aux nombres d'arguments donnés par le joueur
+     * @param ls corresponds aux arguments donnés par le joueur</p>
+     */
     private void takeCommand(int nbArgs, List<String> ls)
     {
         Map<String,Thing> currentThings = this.currentPlace.getThings();
@@ -224,13 +297,32 @@ public class Player {
     }
 
 
-
+    /**
+     * <p>Cette méthode réagit à la saisie utilisateur <b>QUIT</b>
+     * Elle ne peut être appelée que par executeCommand.</p>
+     * <p>Quit permet à l'utilisateur de quitter le jeu.
+     * On peut très bien imaginer une autre utilisation avec
+     * de la sérialization pour charger différente parties.</p>
+     */
     private void quitCommand(){
         this.hp=0;
         System.out.println("You quit the game, bye!\n");
     }
 
 
+     /**
+     * <p>Cette méthode réagit à la saisie utilisateur <b>USE</b>
+     * Elle ne peut être appelée que par executeCommand.</p>
+     * <p>USE est une commande très polyvalente.
+     * On peut USE un item de l'inventaire, lorsqu'il a une utilisation seul
+     * On peut USE un item sur une créature pour se battre, 
+     * lui faisant plus ou moins de dégâts selon les arguments de l'item.
+     * On peut USE un item sur un autre item pour fabriquer un nouvel item.
+     * On peut USE un item (clé ou goldring) sur un lieu pour ouvrir une porte
+     * fermé ou spéciale.
+     * @param nbArgs corresponds aux nombres d'arguments donnés par le joueur
+     * @param ls corresponds aux arguments donnés par le joueur</p>
+     */
     private void useCommand(int nbArgs, List<String> ls){
         Map<String,Creature> currentCreature = this.currentPlace.getCreatures();
         Map<String,Item> currentItems = this.currentPlace.getItems();
@@ -266,35 +358,60 @@ public class Player {
     }
 
 
-
+     /**
+     * <p>Cette méthode réagit à la saisie utilisateur <b>INVENTORY</b>
+     * Elle ne peut être appelée que par executeCommand.</p>
+     * <p>Inventory affiche le profil du joueur ainsi que le contenu
+     * de son inventaire.</p>
+     */
     private void inventoryCommand(){
-        System.out.println("You have " + this.hp + " life points!\n");
+        System.out.println("Your name : " + this.NAME 
+                + "\nYour life points : " + this.hp 
+                + "\nCurrent place : " + this.currentPlace);
         if(!inventory.isEmpty()){
-            System.out.println("Your inventory : ");
+            System.out.println("\nYour inventory : ");
             for (Item i : inventory.values()) System.out.println("- "+ i);           
         } else System.out.println("There is nothing in your inventory.");
     }
 
     
-    
+    /**
+     * <p>Cette méthode ajoute de la vie au joueur
+     * @param hp correspond à la quantité de vie ajoutée</p> 
+     */
     public void addHp(int hp) {
         this.hp += hp;
     }
 
+    
+    /**
+     * <p>Cette méthode récupère tous les items présent dans l'inventaire
+     * @return les éléments de l'inventaire du joueur sous forme de Map</p> 
+     */
     public Map<String, Item> getInventory() {
         return inventory;
     }
 
+    
+    /**
+     * <p>Cette méthode est un getteur sur la vie du joueur
+     * @return la vie du joueur sous forme d'entier</p> 
+     */
     public int getHp() {
         return hp;
     }
 
-    public void setFigth(boolean inFigth) {
-        this.inFigth = inFigth;
+    
+    /**
+     * <p>Cette méthode est un setteur sur la mise en combat d'un joueur
+     * @param inFight dit si le joueur est en combat, de type boolean</p> 
+     */
+    public void setFigth(boolean inFight) {
+        this.inFight = inFight;
     }
 
     public boolean isInFigth() {
-        return inFigth;
+        return inFight;
     }
      
         

@@ -9,15 +9,20 @@ import java.util.LinkedHashMap;
 import java.util.Scanner;
 import java.util.Map;
 
-
+/**
+ * <p>Un <b>monde</b> est caractérisé par un joueur et
+ * une liste de salles.</p>
+ * @author alexa
+ */
 public class World {
 
     private final Map<String,Place> LISTEPLACES;
-
     private final Player JOUEUR;
     
     
-
+    /**
+     * 
+     */
     public World() {
         System.out.println("Veuillez entrer votre pseudonyme :");
         this.JOUEUR = new Player(new Scanner(System.in).nextLine(),this);
