@@ -1,9 +1,12 @@
 package themanor.thing.item;
 
-import themanor.World;
 import themanor.thing.Thing;
-import themanor.thing.item.Item;
 
+
+/**
+ * Classe d'une fontaine
+ * @author alexa
+ */
 public class Fountain extends Item {
 
     public Fountain(String name) {
@@ -15,7 +18,10 @@ public class Fountain extends Item {
     }
 
     
-
+    /**
+     * On redéfinit la méthode toString pour chaque porte
+     * @return le message type String
+     */  
     @Override
     public String toString() {
         return("a clear water fountain");

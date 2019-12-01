@@ -3,8 +3,12 @@ package themanor.thing.item;
 import themanor.World;
 import themanor.interfaces.Takable;
 import themanor.thing.Thing;
-import themanor.thing.item.Item;
 
+
+/**
+ * Classe d'un détergent
+ * @author alexa
+ */
 public class Detergent extends Item implements Takable {
 
     public Detergent(String name) {
@@ -14,7 +18,13 @@ public class Detergent extends Item implements Takable {
     public Detergent(String name, Thing itemHidden) {
         super(name, itemHidden,4);
     }
+ 
     
+    /**
+     * Cette méthode permet d'utiliser du détergent sur des plantes
+     * @param w correspond au monde
+     * @param i correspond aux plantes
+     */
     @Override
     public void use(World w,Item i){
         if (i instanceof Plants){
@@ -26,6 +36,11 @@ public class Detergent extends Item implements Takable {
         }
     }
 
+    
+    /**
+     * On redéfinit la méthode toString pour chaque porte
+     * @return le message type String
+     */  
     @Override
     public String toString() {
         return("a detergent bottle of a brand that does not even exist anymore");

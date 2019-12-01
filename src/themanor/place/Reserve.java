@@ -1,7 +1,10 @@
 package themanor.place;
 
-import themanor.place.Place;
 
+/**
+ * Classe d'une réserve
+ * @author alexa
+ */
 public class Reserve extends Place {
 
     public Reserve(String name) {

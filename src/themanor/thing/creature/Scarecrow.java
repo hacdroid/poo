@@ -1,8 +1,12 @@
 package themanor.thing.creature;
 
-import themanor.Player;
 import themanor.thing.Thing;
 
+
+/**
+ * Classe d'un épouvantail
+ * @author alexa
+ */
 public class Scarecrow extends Creature {
 
     public Scarecrow(String name) {

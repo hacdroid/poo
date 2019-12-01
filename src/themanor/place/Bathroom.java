@@ -1,9 +1,11 @@
 package themanor.place;
 
-import themanor.place.Place;
 
+/**
+ * Classe de la salle de bain
+ * @author alexa
+ */
 public class Bathroom extends Place {
-
 
     public Bathroom(String name) {
         super(name);

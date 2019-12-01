@@ -4,6 +4,11 @@ import themanor.World;
 import themanor.interfaces.Takable;
 import themanor.thing.Thing;
 
+
+/**
+ * Classe d'une bouteille
+ * @author alexa
+ */
 public class Bottle extends Item implements Takable {
 
     public Bottle(String name) {
@@ -15,6 +20,12 @@ public class Bottle extends Item implements Takable {
     }
  
     
+    /**
+     * Méthode permettant de remplir une bouteille, d'eau
+     * @param w correspond au monde
+     * @param i correspond à la fontaine
+     */
+    @Override
     public void use(World w,Item i){
         if (i instanceof Fountain){
             System.out.println("You fill your bottle with water from the fountain.");
@@ -25,6 +36,11 @@ public class Bottle extends Item implements Takable {
         }
     }
 
+    
+    /**
+     * On redéfinit la méthode toString pour chaque porte
+     * @return le message type String
+     */  
     @Override
     public String toString() {
         return("a plastic bottle, it can handle some liquid");

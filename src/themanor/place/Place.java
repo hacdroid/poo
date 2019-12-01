@@ -1,120 +1,172 @@
 package themanor.place;
 
+import java.util.HashMap;
 import themanor.thing.item.Item;
 import themanor.thing.creature.Creature;
 import themanor.thing.Thing;
-import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import themanor.exit.Exit;
 
+
+/**
+ * Classe abstraire des différentes salles
+ * @author alexa
+ */
 public abstract class Place {
-
-	//private List<Thing> listThing;
-        private Map<String,Thing> things;
-        private final String NAME;
-        private final Map<String,Exit> EXITS;
+    private Map<String,Thing> things = new HashMap<>();
+    private final String NAME;
+    private final Map<String,Exit> EXITS =  new HashMap<>();
 
 
-
-	public Place(String name) {
-            //this.listThing = new ArrayList<>();
-            if (name == null){
-                this.NAME="room";
-            } else this.NAME=name;
-            this.EXITS = new LinkedHashMap<>();
-            this.things = new Hashtable<>();
-	}
-        
-        public String getName(){
-            return this.NAME;
-        }
+    /**
+     * Constructeur d'une salle caractérisée par un nom, des entités
+     * et des portes sur des salles voisines
+     * @param name correspond au nom de la salle
+     */
+    public Place(String name) {
+        if (name == null) this.NAME="unnamed_room";
+        else this.NAME=name;
+    }
 
 
-	public void addThing(Thing item) {
-            this.things.put(item.getName(), item);
-	}
-        
-        public void addExit(String name, Exit sortie){
-            this.EXITS.put(name,sortie);
-        }
-        
-        public Map<String,Thing> getThings(){
-            return this.things;
-        }
-        
-        public Map<String,Exit> getExits(){
-            return this.EXITS;
-        }
-        
-        public Map<String,Exit> getOpenExits(){
-            Map<String,Exit> me = new LinkedHashMap<>();
-            for(Map.Entry<String, Exit> entry : this.EXITS.entrySet()){
-                if (entry.getValue().isOpen()){
-                    me.put(entry.getKey(), entry.getValue());
-                }
-            }  
-            return me;
-        }
-
-        public Map<String,Item> getItems(){
-            Map<String,Item> mi = new LinkedHashMap<>();
-            for(Map.Entry<String, Thing> entry : this.things.entrySet()){
-                if( entry.getValue() instanceof Item ){ 
-                    mi.put(entry.getKey(), (Item)entry.getValue());
-                }
-            }  
-            return mi;
-        }
-        
-        public Map<String,Creature> getCreatures(){
-            Map<String,Creature> mc = new LinkedHashMap<>();
-            for(Map.Entry<String, Thing> entry : this.things.entrySet()){
-                if( entry.getValue() instanceof Creature ){ 
-                    mc.put(entry.getKey(), (Creature)entry.getValue());
-                }
-            }  
-            return mc;
-        }
-        
-        
-        
-        @Override
-        public String toString(){
-            return "the " + this.getName() +"!";
-        }
+    /**
+     * Méthode pour récupèrer le nom de la salle
+     * @return le nom de type String
+     */
+    public String getName(){
+        return this.NAME;
+    }
 
 
-        
-        public String toStringComplete()
+    /**
+     * Méthode pour ajouter des entités dans la liste
+     * des entités présentent dans une salle
+     * @param item correspond à l'entité à ajouter
+     */
+    public void addThing(Thing item) {
+        this.things.put(item.getName(), item);
+    }
+
+
+    /**
+     * Méthode pour ajouter des sorties dans la liste
+     * des sorties présentent dans une salle
+     * @param name correspond au nom de la place voisine
+     * @param sortie correspond à la sortie à ajouter
+     */
+    public void addExit(String name, Exit sortie){
+        this.EXITS.put(name,sortie);
+    }
+
+
+    /**
+     * Méthode pour récupèrer les entités de la salle
+     * @return les entités de type Map
+     */
+    public Map<String,Thing> getThings(){
+        return this.things;
+    }
+
+
+    /**
+     * Méthode pour récupérer les sorties de la salle
+     * @return les sorties de type Map
+     */
+    public Map<String,Exit> getExits(){
+        return this.EXITS;
+    }
+
+
+    /**
+     * Méthode pour récupérer les sorties ouvertes de la salle
+     * @return les sorties ouvertes de type Map
+     */
+    public Map<String,Exit> getOpenExits(){
+        Map<String,Exit> me = new LinkedHashMap<>();
+        for(Map.Entry<String, Exit> entry : this.EXITS.entrySet()){
+            if (entry.getValue().isOpen()){
+                me.put(entry.getKey(), entry.getValue());
+            }
+        }  
+        return me;
+    }
+
+
+    /**
+     * Méthode pour récupérer les Items (donc sans les créatures)
+     * de la salle
+     * @return les items sous forme de Map
+     */
+    public Map<String,Item> getItems(){
+        Map<String,Item> mi = new LinkedHashMap<>();
+        for(Map.Entry<String, Thing> entry : this.things.entrySet()){
+            if( entry.getValue() instanceof Item ){ 
+                mi.put(entry.getKey(), (Item)entry.getValue());
+            }
+        }  
+        return mi;
+    }
+
+
+    /**
+     * Méthode pour récupérer les créatures de la salle
+     * @return les créatures sous forme de Map
+     */
+    public Map<String,Creature> getCreatures(){
+        Map<String,Creature> mc = new LinkedHashMap<>();
+        for(Map.Entry<String, Thing> entry : this.things.entrySet()){
+            if( entry.getValue() instanceof Creature ){ 
+                mc.put(entry.getKey(), (Creature)entry.getValue());
+            }
+        }  
+        return mc;
+    }
+
+
+    /**
+     * Méthode toString plus longue, on l'a nommé ainsi par convention
+     * mais elle n'est pas lié au toString
+     * @return un message de type String
+     */
+    public String toStringComplete()
+    {
+        String desc = "the " 
+                + this.getName() 
+                + "!\n\nThere, you can see "
+                + this.getExits().size() 
+                + " exit(s) :\n";
+
+        for (String key : this.EXITS.keySet())
         {
-            String desc = "the " 
-                    + this.getName() 
-                    + "!\n\nThere, you can see "
-                    + this.getExits().size() 
-                    + " exit(s) :\n";
-            
-            for (String key : this.EXITS.keySet())
+            desc = desc.concat("- " 
+                    + this.EXITS.get(key).toString()
+                    + "\n");
+        }
+        
+        if (!this.things.isEmpty())
+        {  
+            desc = desc.concat("\nAnd also " 
+                    + this.things.size() 
+                    + " entities :\n");
+
+            for (String key : this.things.keySet())
             {
                 desc = desc.concat("- " 
-                        + this.EXITS.get(key).toString()
+                        + this.things.get(key).toString()
                         + "\n");
             }
-            if (!this.things.isEmpty())
-            {  
-                desc = desc.concat("\nAnd also " 
-                        + this.things.size() 
-                        + " entities :\n");
-                
-                for (String key : this.things.keySet())
-                {
-                    desc = desc.concat("- " 
-                            + this.things.get(key).toString()
-                            + "\n");
-                }
-            }
-            return desc;
         }
+        return desc;
+    }
+
+
+    /**
+     * On redéfinit la méthode toString pour chaque porte
+     * @return le message type String
+     */
+    @Override
+    public String toString(){
+        return "the " + this.getName() +"!";
+    }
 }

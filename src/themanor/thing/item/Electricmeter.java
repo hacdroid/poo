@@ -4,7 +4,7 @@ import themanor.World;
 import themanor.thing.Thing;
 
 /**
- *
+ * Classe d'un tableau électrique
  * @author alexa
  */
 public class Electricmeter extends Item {
@@ -18,6 +18,10 @@ public class Electricmeter extends Item {
     }
 
 
+    /**
+     * La méthode permet d'allumer la lumière
+     * @param w correspond au monde
+     */
     @Override
     public void use(World w) {
         System.out.println("You turn the light on!");
@@ -26,6 +30,11 @@ public class Electricmeter extends Item {
  
     }
 
+    
+    /**
+     * On redéfinit la méthode toString pour chaque porte
+     * @return le message type String
+     */  
     @Override
     public String toString() {
         return("an electricmeter");
