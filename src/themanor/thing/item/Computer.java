@@ -1,14 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package themanor.thing.item;
 
 import themanor.World;
 import themanor.thing.Thing;
 
-
+/**
+ * Classe d'un ordinateur lié à un item électroniquement bloqué
+ * @author alexa
+ */
 public class Computer extends Item {
 
     public Computer(String name) {
@@ -19,6 +17,11 @@ public class Computer extends Item {
         super(name,linkedItem);
     }
 
+    
+    /**
+     * Méthode pour débloquer electroniquement un item bloqué
+     * @param w correspond au monde
+     */
     @Override
     public void use(World w) {
         if (((Wardrobe)super.getItemHide()).isLocked()){
@@ -29,6 +32,11 @@ public class Computer extends Item {
         }
     }
 
+    
+    /**
+     * On redéfinit la méthode toString pour chaque porte
+     * @return le message type String
+     */  
     @Override
     public String toString() {
         return("a computer plugged into the wall");

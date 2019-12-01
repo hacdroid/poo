@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package themanor.thing.item;
 
 import themanor.World;
@@ -10,7 +5,7 @@ import themanor.interfaces.Takable;
 import themanor.thing.Thing;
 
 /**
- *
+ * Classe d'une canne à pêche
  * @author alexa
  */
 public class Fishingrod extends Item implements Takable {
@@ -23,6 +18,13 @@ public class Fishingrod extends Item implements Takable {
         super(name, itemHidden,4);
     }
     
+    
+    /**
+     * Méthode permettant de pêcher l'item caché dans le lac empoisonné
+     * @param w correspond au monde
+     * @param i correspond au lac
+     */
+    @Override
     public void use(World w,Item i){
         if (i instanceof PoisonedLake){
             System.out.println("You harvest a " + i.getItemHide().getName() + "!\nIt's seems to be use somewhere!");
@@ -34,6 +36,11 @@ public class Fishingrod extends Item implements Takable {
         }
     }
 
+    
+    /**
+     * On redéfinit la méthode toString pour chaque porte
+     * @return le message type String
+     */  
     @Override
     public String toString() {
         return("a handmade fishingrod");

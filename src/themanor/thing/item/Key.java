@@ -4,10 +4,15 @@ import themanor.World;
 import themanor.exit.Exit;
 import themanor.exit.LockedDoor;
 import themanor.interfaces.Takable;
-import themanor.thing.item.Item;
 
+
+/**
+ * Classe d'une clé 
+ * qui utilise un code pour débloquer une porte
+ * @author alexa
+ */
 public class Key extends Item implements Takable {
-    private final int CODE; //ON A DECIDE D'UTILISER UN SYSTEME DE CODE AVEC LES PORTES
+    private final int CODE;
     
     public Key(String name, int code) {
         super(name,4);
@@ -15,11 +20,22 @@ public class Key extends Item implements Takable {
     }
 
     
+    /**
+     * Cette méthode donne des indications sur l'utilisation du clé
+     * @param w correspond au monde
+     */
     @Override
     public void use(World w) {
         System.out.println("You need to specify the door place to use.");
     }
     
+    
+    /**
+     * Cette méthode permet d'ouvrir une porte avec une clé ayant le bon code
+     * @param w correspond au monde
+     * @param e correspond à la sortie choisie
+     */
+    @Override
     public void use(World w,Exit e){
         if (e instanceof LockedDoor){
             if (!((LockedDoor)e).isOpen()){
@@ -36,6 +52,10 @@ public class Key extends Item implements Takable {
     }
 
 
+    /**
+     * On redéfinit la méthode toString pour chaque porte
+     * @return le message type String
+     */  
     @Override
     public String toString() {
         return("the key" + this.CODE);

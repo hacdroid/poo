@@ -1,8 +1,12 @@
 package themanor.thing.creature;
 
-import themanor.Player;
 import themanor.thing.Thing;
 
+
+/**
+ * Classe d'une chauve-souris
+ * @author alexa
+ */
 public class Bat extends Creature {
     
     public Bat(String name){

@@ -1,11 +1,14 @@
 package themanor.thing.item;
 
 import themanor.World;
-import themanor.exit.Exit;
-import themanor.exit.SpecialDoor;
 import themanor.interfaces.Takable;
 import themanor.thing.Thing;
 
+
+/**
+ * Classe d'un anneau en or
+ * @author alexa
+ */
 public class Goldring extends Item implements Takable {
 
     public Goldring(String name) {
@@ -16,6 +19,13 @@ public class Goldring extends Item implements Takable {
         super(name, itemHidden,20);
     }
     
+    
+    /**
+     * Cette méthode permet d'ouvrir une porte spécial avec un goldring
+     * @param w correspond au monde
+     * @param i correspond au socle
+     */
+    @Override
     public void use(World w,Item i){
         if (i instanceof SpecialDoorSocle){
             if (!((SpecialDoorSocle)i).getLinkedDoor().isOpen()){
@@ -27,6 +37,10 @@ public class Goldring extends Item implements Takable {
     }
 
 
+    /**
+     * On redéfinit la méthode toString pour chaque porte
+     * @return le message type String
+     */  
     @Override
     public String toString() {
         return("a shiny tiny gold ring, it's got a perfect round shape");

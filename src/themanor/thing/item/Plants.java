@@ -1,8 +1,12 @@
 package themanor.thing.item;
 
-import themanor.World;
 import themanor.thing.*;
 
+
+/**
+ * Classe de plantes
+ * @author alexa
+ */
 public class Plants extends Item{
 
     public Plants(String name) {
@@ -13,12 +17,14 @@ public class Plants extends Item{
         super(name, itemHidden);
     }
 
+    
+    /**
+     * On redéfinit la méthode toString pour chaque porte
+     * @return le message type String
+     */  
     @Override
     public String toString() {
         return "There are plants that prevent you to move forward.";
     }
-    
-
-    
-    
+ 
 }

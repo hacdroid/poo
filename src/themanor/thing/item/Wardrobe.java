@@ -9,7 +9,7 @@ import themanor.World;
 import themanor.thing.Thing;
 
 /**
- *
+ * Classe d'une armoire électroniquement bloquée
  * @author alexa
  */
 public class Wardrobe extends Item {
@@ -24,7 +24,10 @@ public class Wardrobe extends Item {
     }
     
 
-
+    /**
+     * La méthode de récupérer une clé dans l'armoire
+     * @param w correspond au monde
+     */
     @Override
     public void use(World w) {
         if (lock){
@@ -33,25 +36,33 @@ public class Wardrobe extends Item {
             System.out.println("There is the " + this.getItemHide().getName() + " into this wardrobe!");
             w.getJOUEUR().getActualPlace().getThings().remove(this.getName());
             w.getJOUEUR().getActualPlace().addThing(this.getItemHide());
-        }
-        
-        
-        
+        }   
     }
 
+    
+    /**
+     * On redéfinit la méthode toString pour chaque porte
+     * @return le message type String
+     */      
     @Override
     public String toString() {
         return("an electronic wardrobe");
     }
 
+    
+    /**
+     * Cette méthode permet à l'ordinateur de débloquer l'armoir
+     */
     public void unlock() {
         this.lock = false;
     }
     
+    
+    /**
+     * Cette méthode permet de vérifier si l'armoire est débloquée
+     * @return un booléen
+     */
     public boolean isLocked(){
         return this.lock;
     }
-     
-    
-    
 }

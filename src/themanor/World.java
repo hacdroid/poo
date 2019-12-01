@@ -1,41 +1,45 @@
 package themanor;
 
+import java.util.HashMap;
 import themanor.thing.item.NPC;
 import themanor.exit.*;
 import themanor.thing.creature.*;
 import themanor.place.*;
 import themanor.thing.item.*;
-import java.util.LinkedHashMap;
 import java.util.Scanner;
 import java.util.Map;
 
 /**
- * <p>Un <b>monde</b> est caractérisé par un joueur et
- * une liste de salles.</p>
+ * Un monde est caractérisé par un seul joueur et
+ * une liste de salles.
  * @author alexa
  */
 public class World {
 
-    private final Map<String,Place> LISTEPLACES;
+    private final Map<String,Place> LISTEPLACES  = new HashMap<>();
     private final Player JOUEUR;
     
     
     /**
-     * 
+     * Le constructeur World récupère le nom du saisi par le joueur
+     * et initialise le joueur, les salles et toutes les entités de
+     * la partie.
      */
     public World() {
         System.out.println("Veuillez entrer votre pseudonyme :");
         this.JOUEUR = new Player(new Scanner(System.in).nextLine(),this);
-        this.LISTEPLACES = new LinkedHashMap<>();
         this.initGame();
     }
     
     /**
-     * Méthode d'intialisation des lieux, 
+     * Cette méthode initialise chaque élément du jeu avec leurs liens.
+     * On initialise les salles, leurs liens de sorties, les items
+     * de chaque salle (éventuellement caché derrière un autre item).
+     * Elle n'est appelée que par le constructeur World.
      */
     private void initGame(){
         /*
-        Initialisation des places
+        Initialisation des salles
         */
         Place hall = new Hall("hall");
         Place office = new Office("office");
@@ -74,8 +78,8 @@ public class World {
         livingroom.addExit("child_bedroom", new Door(childbedroom));
         childbedroom.addExit("livingroom", new Door(livingroom));
         childbedroom.addExit("reserve", new SpecialDoor(reserve));
-        childbedroom.addExit("adult_bedroom", new LockedDoor(adultbedroom,5));
-        adultbedroom.addExit("child_bedroom", new Door(childbedroom));
+        childbedroom.addExit("adultbedroom", new LockedDoor(adultbedroom,5));
+        adultbedroom.addExit("childbedroom", new Door(childbedroom));
         loundge.addExit("livingroom", new Door(livingroom));
         loundge.addExit("garden", new Door(garden));
         reserve.addExit("child_bedroom", new Door(childbedroom));
@@ -84,7 +88,7 @@ public class World {
         garden.addExit("loundge", new Door(loundge));
          
         /*
-        Initialisation des things
+        Initialisation des entités
         */
         hall.addThing(new Bread("bread"));
         hall.addThing(new Broom("broom"));
@@ -106,7 +110,7 @@ public class World {
 
         
         /*
-        Memorisation des différents lieux du jeu avec leurs attributs
+        Sauvegarde des différents lieux du jeu avec leurs attributs
         */        
         this.LISTEPLACES.put("hall",hall);
         this.LISTEPLACES.put("office",office);
@@ -123,45 +127,54 @@ public class World {
         this.LISTEPLACES.put("garden",garden);
         this.LISTEPLACES.put("outside",outside);
         
+        
+        /*
+        On set le joueur dans le hall au début de la partie
+        */
         this.JOUEUR.setActualPlace(hall);
    }
 
 
+    /**
+     * Cette méthode est la boucle de jeu.
+     * C'est elle qui attend la saisie du joueur et qui
+     * annonce la fin du jeu.
+     */
     public void start() {
-        System.out.println("At anytime, type HELP to see your commands.\n");
-        
-        System.out.println("Welcome " + this.JOUEUR.getName() + " to \"the manor\"!");
-        
-        
-        
-        System.out.println("You wake up .. you have a headache, you do not know where you are. \n" 
+        System.out.println("");
+        System.out.println("");
+        System.out.println("At anytime, type HELP to see your commands.\n" 
+                + "Welcome " 
+                + this.JOUEUR.getName() + " to \"the manor\"! "
+                + "You wake up .. you have a headache, you do not know where you are. \n" 
                 + "You get up, you have cramps in your legs and tremble lightly. \n"
                 + "You have to get out of here and go home, but the door is locked, how to get out?\n"
-                + "\n"
-                + "\n"
-                + "You are into the hall");
-        
+                + "\n\nYou are into the hall");
         
         while(!this.JOUEUR.getIsOut() && !this.JOUEUR.getActualPlace().equals(this.LISTEPLACES.get("outside")))
             this.JOUEUR.saisieCommand();
         
-        
-        if (this.JOUEUR.getIsOut()){
+        if (this.JOUEUR.getIsOut())
             System.out.println("YOU LOOSE : GAME OVER!");
-        } else if(this.JOUEUR.getActualPlace().equals(this.LISTEPLACES.get("outside"))) {
-            System.out.println("YOU WIN!");
-        }        
-        
+        else if(this.JOUEUR.getActualPlace().equals(this.LISTEPLACES.get("outside")))
+            System.out.println("YOU WIN!"); 
     }
 
+    
+    /**
+     * Cette méthode est un getteur sur les salles
+     * @return correspond à toutes les salles du monde.
+     */
     public Map<String, Place> getLISTEPLACES() {
         return LISTEPLACES;
     }    
 
+    
+    /**
+     * Cette méthode est un getteur sur le joueur
+     * @return correspond au joueur du monde actuel.
+     */
     public Player getJOUEUR() {
         return JOUEUR;
     }
-
-    
-
 }

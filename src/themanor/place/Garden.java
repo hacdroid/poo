@@ -1,7 +1,11 @@
 package themanor.place;
 
-import themanor.place.Place;
 
+
+/**
+ * Classe d'un jardin
+ * @author alexa
+ */
 public class Garden extends Place {
 
     public Garden(String name) {

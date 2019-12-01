@@ -1,8 +1,8 @@
 package themanor;
 
 /**
- * <p>Classe <b>main</b> qui créé le monde et met en route la partie</p>
- * @authors alexa
+ * Classe main qui créé le monde et met en route la partie
+ * @author alexa
  */
 public class Main {
 
