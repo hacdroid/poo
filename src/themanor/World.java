@@ -82,7 +82,7 @@ public class World {
         adultbedroom.addExit("childbedroom", new Door(childbedroom));
         loundge.addExit("livingroom", new Door(livingroom));
         loundge.addExit("garden", new Door(garden));
-        reserve.addExit("child_bedroom", new Door(childbedroom));
+        reserve.addExit("childbedroom", new Door(childbedroom));
         garage.addExit("garden", new Door(garden));
         garden.addExit("garage", new LockedDoor(garage,1));
         garden.addExit("loundge", new Door(loundge));
@@ -119,8 +119,8 @@ public class World {
         this.LISTEPLACES.put("kitchen",kitchen);
         this.LISTEPLACES.put("storeroom",storeroom);
         this.LISTEPLACES.put("livingroom",livingroom);
-        this.LISTEPLACES.put("child_bedroom",childbedroom);
-        this.LISTEPLACES.put("adult_bedroom",adultbedroom);
+        this.LISTEPLACES.put("childbedroom",childbedroom);
+        this.LISTEPLACES.put("adultbedroom",adultbedroom);
         this.LISTEPLACES.put("loundge",loundge);
         this.LISTEPLACES.put("reserve",reserve);
         this.LISTEPLACES.put("garage",garage);
@@ -132,6 +132,8 @@ public class World {
         On set le joueur dans le hall au début de la partie
         */
         this.JOUEUR.setActualPlace(hall);
+        
+        this.JOUEUR.getInventory().put("torch", new Torch("torch"));
    }
 
 
@@ -149,6 +151,7 @@ public class World {
                 + "You wake up .. you have a headache, you do not know where you are. \n" 
                 + "You get up, you have cramps in your legs and tremble lightly. \n"
                 + "You have to get out of here and go home, but the door is locked, how to get out?\n"
+                + "It's dark, the electricity seems cut off...\n"
                 + "\n\nYou are into the hall");
         
         while(!this.JOUEUR.getIsOut() && !this.JOUEUR.getActualPlace().equals(this.LISTEPLACES.get("outside")))

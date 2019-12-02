@@ -1,6 +1,7 @@
 package themanor.thing.item;
 
 import themanor.World;
+import themanor.place.Place;
 import themanor.thing.Thing;
 
 /**
@@ -24,7 +25,10 @@ public class Electricmeter extends Item {
      */
     @Override
     public void use(World w) {
-        System.out.println("You turn the light on!");
+        System.out.println("You turn on the electricity in the manor!\n"
+                + "You can see better into the room and"
+                + " you have probably unlocked electronic objetcs.");
+        Place.isElectricityOn = true;
         w.getJOUEUR().getActualPlace().getThings().remove(this.getName());
         w.getJOUEUR().getActualPlace().addThing(this.getItemHide());
  

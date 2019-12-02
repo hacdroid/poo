@@ -1,6 +1,7 @@
 package themanor.thing.item;
 
 import themanor.World;
+import static themanor.place.Place.isElectricityOn;
 import themanor.thing.Thing;
 
 /**
@@ -24,11 +25,15 @@ public class Computer extends Item {
      */
     @Override
     public void use(World w) {
-        if (((Wardrobe)super.getItemHide()).isLocked()){
-            ((Wardrobe)super.getItemHide()).unlock();
-            System.out.println("You have unlocked something that was electronically locked!");
-        } else {
-            System.out.println("You have already done that!");
+        if (isElectricityOn){
+            if (((Wardrobe)super.getItemHide()).isLocked()){
+                ((Wardrobe)super.getItemHide()).unlock();
+                System.out.println("You have unlocked something that was electronically locked!");
+            } else {
+                System.out.println("You have already done that!");
+            }
+        } else{
+            System.out.println("You cannot use it without electricity.");
         }
     }
 

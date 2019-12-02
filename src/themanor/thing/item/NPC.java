@@ -35,7 +35,7 @@ public class NPC extends Item {
      */  
     @Override
     public String toString() {
-        return ("A friendly mans spread out at the ground");
+        return ("A friendly man spread out at the ground");
     }
     
 }

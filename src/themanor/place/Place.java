@@ -14,9 +14,10 @@ import themanor.exit.Exit;
  * @author alexa
  */
 public abstract class Place {
-    private Map<String,Thing> things = new HashMap<>();
+    private final Map<String,Thing> THINGS = new HashMap<>();
     private final String NAME;
     private final Map<String,Exit> EXITS =  new HashMap<>();
+    public static boolean isElectricityOn;
 
 
     /**
@@ -27,6 +28,7 @@ public abstract class Place {
     public Place(String name) {
         if (name == null) this.NAME="unnamed_room";
         else this.NAME=name;
+        isElectricityOn=false;
     }
 
 
@@ -45,7 +47,7 @@ public abstract class Place {
      * @param item correspond à l'entité à ajouter
      */
     public void addThing(Thing item) {
-        this.things.put(item.getName(), item);
+        this.THINGS.put(item.getName(), item);
     }
 
 
@@ -65,7 +67,7 @@ public abstract class Place {
      * @return les entités de type Map
      */
     public Map<String,Thing> getThings(){
-        return this.things;
+        return this.THINGS;
     }
 
 
@@ -100,7 +102,7 @@ public abstract class Place {
      */
     public Map<String,Item> getItems(){
         Map<String,Item> mi = new LinkedHashMap<>();
-        for(Map.Entry<String, Thing> entry : this.things.entrySet()){
+        for(Map.Entry<String, Thing> entry : this.THINGS.entrySet()){
             if( entry.getValue() instanceof Item ){ 
                 mi.put(entry.getKey(), (Item)entry.getValue());
             }
@@ -115,7 +117,7 @@ public abstract class Place {
      */
     public Map<String,Creature> getCreatures(){
         Map<String,Creature> mc = new LinkedHashMap<>();
-        for(Map.Entry<String, Thing> entry : this.things.entrySet()){
+        for(Map.Entry<String, Thing> entry : this.THINGS.entrySet()){
             if( entry.getValue() instanceof Creature ){ 
                 mc.put(entry.getKey(), (Creature)entry.getValue());
             }
@@ -144,16 +146,16 @@ public abstract class Place {
                     + "\n");
         }
         
-        if (!this.things.isEmpty())
+        if (!this.THINGS.isEmpty())
         {  
             desc = desc.concat("\nAnd also " 
-                    + this.things.size() 
+                    + this.THINGS.size() 
                     + " entities :\n");
 
-            for (String key : this.things.keySet())
+            for (String key : this.THINGS.keySet())
             {
                 desc = desc.concat("- " 
-                        + this.things.get(key).toString()
+                        + this.THINGS.get(key).toString()
                         + "\n");
             }
         }

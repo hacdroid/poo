@@ -76,7 +76,7 @@ public abstract class Item extends Thing {
 
     
     /**
-     * Cette méthode réalise l'utilsiation (ou non) qu'un item peut avoir sur
+     * Cette méthode réalise l'utilisation (ou non) qu'un item peut avoir sur
      * une créature en combat.
      * On peut frapper une chauve-souris avec un balai.
      * @param w correspond au monde
