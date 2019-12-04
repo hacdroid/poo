@@ -33,8 +33,8 @@ public class Wire extends Item implements Takable {
                 w.getJoueur().getInventory().put(this.getItemHide().getName(),(Item)this.getItemHide());
                 this.removeItemHide();
             } else System.out.println("You craft nothing");
-            w.getJoueur().getInventory().remove(this);
-            w.getJoueur().getInventory().remove(i);
+            w.getJoueur().getInventory().remove(this.getName());
+            w.getJoueur().getInventory().remove(i.getName());
         }else{
             super.use(w, i);
         }
