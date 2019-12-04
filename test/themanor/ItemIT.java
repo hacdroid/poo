@@ -49,8 +49,8 @@ public class ItemIT {
     @Test
     public void useTest2(){
         i.use(w, c);
-        assertSame(initial_hp_player - 3, w.getJoueur().getHp()); 
-        // LA BAT INFLIGE 3 DEGATS
+        assertSame(initial_hp_player - 4, w.getJoueur().getHp()); 
+        // LA BAT INFLIGE 4 DEGATS
     }
     @Test
     public void useTest3(){
@@ -61,7 +61,7 @@ public class ItemIT {
     public void useTest4(){
         i.use(w, c);
         i.use(w, c);
-        assertSame(initial_hp_player - 3, w.getJoueur().getHp()); 
+        assertSame(initial_hp_player - 4, w.getJoueur().getHp()); 
         // LA BAT N'ATTAQUE QU'UNE FOIS LE PLAYER
     }
     @Test

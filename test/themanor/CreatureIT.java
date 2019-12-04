@@ -73,7 +73,7 @@ public class CreatureIT {
     @Test
     public void attackTest1(){
         c1.attack(p);
-        assertSame(initial_hp_player - 3, p.getHp()); // LA BAT INFLIGE 3 DEGATS
+        assertSame(initial_hp_player - 4, p.getHp()); // LA BAT INFLIGE 4 DEGATS
     }
     @Test
     public void attackTest2(){

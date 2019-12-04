@@ -43,6 +43,6 @@ public class Goldring extends Item implements Takable {
      */  
     @Override
     public String toString() {
-        return("a shiny tiny gold ring, it's got a perfect round shape");
+        return("a shiny tiny goldring, it's got a perfect round shape");
     }
 }

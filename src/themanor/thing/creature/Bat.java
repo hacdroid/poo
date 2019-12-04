@@ -10,11 +10,11 @@ import themanor.thing.Thing;
 public class Bat extends Creature {
     
     public Bat(String name){
-        super(name, 11, 3);
+        super(name, 11, 4);
     }
     
     public Bat(String name, Thing itemHidden) {
-        super(name, 11, 3, itemHidden);
+        super(name, 11, 4, itemHidden);
     }
     
     

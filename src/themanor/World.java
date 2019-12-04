@@ -55,8 +55,8 @@ public class World {
         Place kitchen = new Kitchen("kitchen");
         Place storeroom = new Storeroom("storeroom");
         Place livingroom = new Livingroom("livingroom");
-        Place childbedroom = new Bedroom("child_bedroom");
-        Place adultbedroom = new Bedroom("adult_bedroom");
+        Place childbedroom = new Bedroom("childbedroom");
+        Place adultbedroom = new Bedroom("adultbedroom");
         Place loundge = new Loundge("loundge");
         Place reserve = new Reserve("reserve");
         Place garage = new Garage("garage");
@@ -82,7 +82,7 @@ public class World {
         livingroom.addExit("office", new Door(office));
         livingroom.addExit("storeroom", new Door(storeroom));
         livingroom.addExit("loundge", new LockedDoor(loundge,2));
-        livingroom.addExit("child_bedroom", new Door(childbedroom));
+        livingroom.addExit("childbedroom", new Door(childbedroom));
         childbedroom.addExit("livingroom", new Door(livingroom));
         childbedroom.addExit("reserve", new SpecialDoor(reserve));
         childbedroom.addExit("adultbedroom", new LockedDoor(adultbedroom,5));
@@ -112,8 +112,8 @@ public class World {
         loundge.addThing(new WorldMap("map"));
         reserve.addThing(new Key("key4",4));
         garage.addThing(new Torch("torch"));
-        garden.addThing(new Scarecrow("scarecrow",new Fountain("fountain", new WaterBottle("waterbottle"))));
-        garden.addThing(new PoisonedLake("poisoned_lake",new Goldring("goldring")));
+        garden.addThing(new Scarecrow("scarecrow",new Fountain("fountain", new WaterBottle("bottle"))));
+        garden.addThing(new PoisonedLake("poisonedlake",new Goldring("goldring")));
 
         
         /*
@@ -139,8 +139,6 @@ public class World {
         On set le joueur dans le hall au début de la partie
         */
         this.joueur.setActualPlace(hall);
-        
-        this.joueur.getInventory().put("torch", new Torch("torch"));
    }
 
 
