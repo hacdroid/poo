@@ -84,22 +84,22 @@ public abstract class Item extends Thing {
      */
     public void use(World w,Creature c){        
 
-        if (!w.getJOUEUR().isInFigth()) System.out.println("You start a fight with " + c.getName() + ", " + c.getHp() + " life points.\n");
-        w.getJOUEUR().attack(c, DAMAGE);
+        if (!w.getJoueur().isInFight()) System.out.println("You start a fight with " + c.getName() + ", " + c.getHp() + " life points.\n");
+        w.getJoueur().attack(c, DAMAGE);
         System.out.println("You hit the monster with " + this.getName() + "! He have " + c.getHp() + " life points.\n");
         if (!c.getIsOut()){
-            c.attack(w.getJOUEUR());
-            System.out.println("The creature attack you. You have now " + w.getJOUEUR().getHp() + " life points.\n"); 
+            c.attack(w.getJoueur());
+            System.out.println("The creature attack you. You have now " + w.getJoueur().getHp() + " life points.\n"); 
         }
-        if (!w.getJOUEUR().getIsOut() && !c.getIsOut()){
-            w.getJOUEUR().setFigth(true);                
+        if (!w.getJoueur().getIsOut() && !c.getIsOut()){
+            w.getJoueur().setFight(true);                
         } else {
-            w.getJOUEUR().setFigth(false);
+            w.getJoueur().setFight(false);
         }  
         if (c.getIsOut()){
             System.out.println("You have killed the " + c.getName() + "! It was hiding a " + c.getItemHide().getName() + "!");
-            w.getJOUEUR().getActualPlace().getThings().remove(c.getName());
-            w.getJOUEUR().getActualPlace().addThing(c.getItemHide());
+            w.getJoueur().getActualPlace().getThings().remove(c.getName());
+            w.getJoueur().getActualPlace().addThing(c.getItemHide());
         }
     }
 

@@ -29,8 +29,8 @@ public class Electricmeter extends Item {
                 + "You can see better into the room and"
                 + " you have probably unlocked electronic objetcs.");
         Place.isElectricityOn = true;
-        w.getJOUEUR().getActualPlace().getThings().remove(this.getName());
-        w.getJOUEUR().getActualPlace().addThing(this.getItemHide());
+        w.getJoueur().getActualPlace().getThings().remove(this.getName());
+        w.getJoueur().getActualPlace().addThing(this.getItemHide());
  
     }
 

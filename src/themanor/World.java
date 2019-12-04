@@ -8,6 +8,7 @@ import themanor.place.*;
 import themanor.thing.item.*;
 import java.util.Scanner;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 /**
  * Un monde est caractérisé par un seul joueur et
@@ -17,7 +18,7 @@ import java.util.Map;
 public class World {
 
     private final Map<String,Place> LISTEPLACES  = new HashMap<>();
-    private final Player JOUEUR;
+    private Player joueur;
     
     
     /**
@@ -27,7 +28,13 @@ public class World {
      */
     public World() {
         System.out.println("Veuillez entrer votre pseudonyme :");
-        this.JOUEUR = new Player(new Scanner(System.in).nextLine(),this);
+        try{
+            this.joueur = new Player(new Scanner(System.in).nextLine(),this);
+        }
+        catch(NoSuchElementException e){
+            this.joueur = new Player("player", this);
+        }
+        // Le try catch est utile pour les tests
         this.initGame();
     }
     
@@ -131,9 +138,9 @@ public class World {
         /*
         On set le joueur dans le hall au début de la partie
         */
-        this.JOUEUR.setActualPlace(hall);
+        this.joueur.setActualPlace(hall);
         
-        this.JOUEUR.getInventory().put("torch", new Torch("torch"));
+        this.joueur.getInventory().put("torch", new Torch("torch"));
    }
 
 
@@ -147,19 +154,19 @@ public class World {
         System.out.println("");
         System.out.println("At anytime, type HELP to see your commands.\n" 
                 + "Welcome " 
-                + this.JOUEUR.getName() + " to \"the manor\"! "
+                + this.joueur.getName() + " to \"the manor\"! "
                 + "You wake up .. you have a headache, you do not know where you are. \n" 
                 + "You get up, you have cramps in your legs and tremble lightly. \n"
                 + "You have to get out of here and go home, but the door is locked, how to get out?\n"
                 + "It's dark, the electricity seems cut off...\n"
                 + "\n\nYou are into the hall");
         
-        while(!this.JOUEUR.getIsOut() && !this.JOUEUR.getActualPlace().equals(this.LISTEPLACES.get("outside")))
-            this.JOUEUR.saisieCommand();
+        while(!this.joueur.getIsOut() && !this.joueur.getActualPlace().equals(this.LISTEPLACES.get("outside")))
+            this.joueur.saisieCommand();
         
-        if (this.JOUEUR.getIsOut())
+        if (this.joueur.getIsOut())
             System.out.println("YOU LOOSE : GAME OVER!");
-        else if(this.JOUEUR.getActualPlace().equals(this.LISTEPLACES.get("outside")))
+        else if(this.joueur.getActualPlace().equals(this.LISTEPLACES.get("outside")))
             System.out.println("YOU WIN!"); 
     }
 
@@ -177,7 +184,7 @@ public class World {
      * Cette méthode est un getteur sur le joueur
      * @return correspond au joueur du monde actuel.
      */
-    public Player getJOUEUR() {
-        return JOUEUR;
+    public Player getJoueur() {
+        return joueur;
     }
 }
