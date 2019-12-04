@@ -103,7 +103,7 @@ public abstract class Item extends Thing {
                 System.out.println("It was hiding a " + c.getItemHide().getName() + "!");
                 w.getJoueur().getActualPlace().addThing(c.getItemHide());
                 c.removeItemHide();
-            }System.out.println("\nNothing to unlock!");
+            }else System.out.println("\nNothing to unlock!");
             
         }
     }
