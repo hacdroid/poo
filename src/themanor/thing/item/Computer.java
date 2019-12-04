@@ -26,12 +26,14 @@ public class Computer extends Item {
     @Override
     public void use(World w) {
         if (isElectricityOn){
-            if (((Wardrobe)super.getItemHide()).isLocked()){
-                ((Wardrobe)super.getItemHide()).unlock();
-                System.out.println("You have unlocked something that was electronically locked!");
-            } else {
-                System.out.println("You have already done that!");
-            }
+            if (super.haveAHiddenItem()){
+                if (((Wardrobe)super.getItemHide()).isLocked()){
+                    ((Wardrobe)super.getItemHide()).unlock();
+                    System.out.println("You have unlocked something that was electronically locked!");
+                } else {
+                    System.out.println("You have already done that!");
+                }
+            } else System.out.println("\nNothing to unlock!");
         } else{
             System.out.println("You cannot use it without electricity.");
         }

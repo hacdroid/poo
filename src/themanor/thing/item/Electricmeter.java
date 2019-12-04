@@ -30,7 +30,10 @@ public class Electricmeter extends Item {
                 + " you have probably unlocked electronic objetcs.");
         Place.isElectricityOn = true;
         w.getJoueur().getActualPlace().getThings().remove(this.getName());
-        w.getJoueur().getActualPlace().addThing(this.getItemHide());
+        if (this.haveAHiddenItem()){
+            w.getJoueur().getActualPlace().addThing(this.getItemHide());
+            this.removeItemHide();
+        }
  
     }
 

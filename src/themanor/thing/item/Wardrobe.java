@@ -30,12 +30,14 @@ public class Wardrobe extends Item {
      */
     @Override
     public void use(World w) {
-        if (lock){
+        if (this.lock){
             System.out.println("It seems to be electronically locked!");
         } else {
-            System.out.println("There is the " + this.getItemHide().getName() + " into this wardrobe!");
-            w.getJoueur().getActualPlace().getThings().remove(this.getName());
-            w.getJoueur().getActualPlace().addThing(this.getItemHide());
+            if (this.haveAHiddenItem()){
+                System.out.println("There is the " + this.getItemHide().getName() + " into this wardrobe!");
+                w.getJoueur().getActualPlace().addThing(this.getItemHide());
+                this.removeItemHide();
+            }else System.out.println("\nNothing there");
         }   
     }
 

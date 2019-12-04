@@ -28,8 +28,12 @@ public class Detergent extends Item implements Takable {
     @Override
     public void use(World w,Item i){
         if (i instanceof Plants){
-            System.out.println("You pour detergent on " + i.getName() + ". The plants are now dissolved!\nYou can see a wire behind these.");
-            w.getJoueur().getActualPlace().addThing(i.getItemHide());
+            System.out.println("You pour detergent on " + i.getName() + ". The plants are now dissolved!\n");
+            if (i.haveAHiddenItem()){
+                System.out.println("You can see a wire behind these.");
+                w.getJoueur().getActualPlace().addThing(i.getItemHide());
+                i.removeItemHide();
+            }else System.out.println("Nothing to unlock!");                
             w.getJoueur().getActualPlace().getThings().remove(i.getName());
         }else{
             super.use(w, i);

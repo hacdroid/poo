@@ -26,7 +26,7 @@ public class Player {
     private final String NAME;
     private Map<String,Item> inventory = new LinkedHashMap<>();;
     private Command command;
-    private int hp = 20;
+    private int hp = 15;
     private Place currentPlace;
     private final World WORLD;
     private boolean inFight = false;
@@ -59,7 +59,8 @@ public class Player {
      */
     public void attacked(int damage) {
         if (damage > 0)
-            this.hp -= damage;
+            if (this.hp-damage>=0) this.hp -= damage;
+            else this.hp=0;
     }
 
     

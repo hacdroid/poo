@@ -33,7 +33,7 @@ public class WorldMap extends Item implements Takable {
             "|      |Loundge        |   ???     |   Garage  |\n"+
             "|      |               |           |           |\n"+
             "|Store-|-------||------------------|------------\n"+
-            "|  room|               |child_bed- |adult_bed  |\n"+
+            "|  room|               |Child bed- |Adult bed  |\n"+
             "|      =   Livingroom  =     room  =     room  |\n"+
             "|      |               |           |           |\n"+
             "------------||------||--------------------------\n"+

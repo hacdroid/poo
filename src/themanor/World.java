@@ -97,6 +97,8 @@ public class World {
         /*
         Initialisation des entités
         */
+        hall.addThing(new Scarecrow("scarecrow",new Stick("stick")));
+        hall.addThing(new Bat("bat",new Stick("stick2")));
         hall.addThing(new Bread("bread"));
         hall.addThing(new Broom("broom"));
         office.addThing(new NPC("man", new Key("key1",1)));
@@ -112,7 +114,7 @@ public class World {
         loundge.addThing(new WorldMap("map"));
         reserve.addThing(new Key("key4",4));
         garage.addThing(new Torch("torch"));
-        garden.addThing(new Scarecrow("scarecrow",new Fountain("fountain", new WaterBottle("bottle"))));
+        garden.addThing(new Scarecrow("scarecrow",new Fountain("fountain", new WaterBottle("waterbottle"))));
         garden.addThing(new PoisonedLake("poisonedlake",new Goldring("goldring")));
 
         

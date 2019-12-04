@@ -97,9 +97,14 @@ public abstract class Item extends Thing {
             w.getJoueur().setFight(false);
         }  
         if (c.getIsOut()){
-            System.out.println("You have killed the " + c.getName() + "! It was hiding a " + c.getItemHide().getName() + "!");
+            System.out.println("You have killed the " + c.getName() + "!");
             w.getJoueur().getActualPlace().getThings().remove(c.getName());
-            w.getJoueur().getActualPlace().addThing(c.getItemHide());
+            if (c.haveAHiddenItem()){
+                System.out.println("It was hiding a " + c.getItemHide().getName() + "!");
+                w.getJoueur().getActualPlace().addThing(c.getItemHide());
+                c.removeItemHide();
+            }System.out.println("\nNothing to unlock!");
+            
         }
     }
 

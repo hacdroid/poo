@@ -27,9 +27,12 @@ public class WaterBottle extends Bottle {
     @Override
     public void use(World w,Item i){
         if (i instanceof NPC){
-            System.out.println("You give your water bottle to the man. He is really glad!\n"
-                    + "In appreciation, he gives you the " + i.getItemHide().getName() + "!");
-            w.getJoueur().getInventory().put(i.getItemHide().getName(),(Item)i.getItemHide());
+            System.out.println("You give your water bottle to the man. He is really glad!\n");
+            if (i.haveAHiddenItem()){
+                System.out.println("In appreciation, he gives you the " + i.getItemHide().getName() + "!");
+                w.getJoueur().getInventory().put(i.getItemHide().getName(),(Item)i.getItemHide());
+                i.removeItemHide();
+            } else System.out.println("He gives you nothing!");
             w.getJoueur().getInventory().remove(this.getName());
         }else{
             super.use(w, i);
@@ -43,7 +46,7 @@ public class WaterBottle extends Bottle {
      */  
     @Override
     public String toString() {
-        return("a bottle full of fresh water");
+        return("a waterbottle full of fresh water");
     }
     
 }

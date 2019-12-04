@@ -45,6 +45,15 @@ public abstract class Thing {
     public String getName(){
         return this.NAME;
     }
+    
+    
+    /**
+     * Méthode pour savoir s'il y a un item débloquable
+     * @return un booléen
+     */
+    public boolean haveAHiddenItem(){
+        return (itemHide!=null);
+    }
 
     
     /**
