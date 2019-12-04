@@ -31,7 +31,7 @@ public class Goldring extends Item implements Takable {
             if (!((SpecialDoorSocle)i).getLinkedDoor().isOpen()){
                     System.out.println("You opened the door!\nNow, you can go to the " + ((SpecialDoorSocle)i).getLinkedDoor().getPlace().getName());
                     ((SpecialDoorSocle)i).getLinkedDoor().open();
-                    w.getJOUEUR().getInventory().remove(this.getName());
+                    w.getJoueur().getInventory().remove(this.getName());
             } else System.out.println("Door already open..."); //NORMALEMENT N'ATTEINT JAMAIS CET ENDROIT!
         } else super.use(w, i);
     }

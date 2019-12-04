@@ -26,9 +26,9 @@ public class Bread extends Item implements Takable{
      */
     @Override
     public void use(World w) {
-        w.getJOUEUR().addHp(10);
-        w.getJOUEUR().getInventory().remove(this.getName());
-        System.out.println("Henceforth, you have " + w.getJOUEUR().getHp() + " life points!");
+        w.getJoueur().addHp(10);
+        w.getJoueur().getInventory().remove(this.getName());
+        System.out.println("Henceforth, you have " + w.getJoueur().getHp() + " life points!");
     }
 
     

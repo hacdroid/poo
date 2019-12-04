@@ -57,11 +57,4 @@ public class ThingIT {
         t2.removeItemHide();
         assertNull(t2.getItemHide());
     }
-    
-    
-    /*
-        Dans le constructeur Thing :
-        if (name = null)
-            name = (NOM PAR DEFAUT)
-    */
 }

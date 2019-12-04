@@ -29,8 +29,8 @@ public class Detergent extends Item implements Takable {
     public void use(World w,Item i){
         if (i instanceof Plants){
             System.out.println("You pour detergent on " + i.getName() + ". The plants are now dissolved!\nYou can see a wire behind these.");
-            w.getJOUEUR().getActualPlace().addThing(i.getItemHide());
-            w.getJOUEUR().getActualPlace().getThings().remove(i.getName());
+            w.getJoueur().getActualPlace().addThing(i.getItemHide());
+            w.getJoueur().getActualPlace().getThings().remove(i.getName());
         }else{
             super.use(w, i);
         }

@@ -41,7 +41,7 @@ public class Key extends Item implements Takable {
             if (!((LockedDoor)e).isOpen()){
                 if(((LockedDoor) e).open(CODE)){
                     System.out.println("You opened the door!\nNow, you can go to the " + e.getPlace().getName());
-                    w.getJOUEUR().getInventory().remove(this.getName());
+                    w.getJoueur().getInventory().remove(this.getName());
                 } else{
                     System.out.println("You did not use the right key to open this door...");
                 }

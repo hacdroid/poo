@@ -28,9 +28,9 @@ public class Fishingrod extends Item implements Takable {
     public void use(World w,Item i){
         if (i instanceof PoisonedLake){
             System.out.println("You harvest a " + i.getItemHide().getName() + "!\nIt's seems to be use somewhere!");
-            w.getJOUEUR().getInventory().put(i.getItemHide().getName(),(Item)i.getItemHide());
+            w.getJoueur().getInventory().put(i.getItemHide().getName(),(Item)i.getItemHide());
             i.removeItemHide();
-            w.getJOUEUR().getInventory().remove(this.getName());
+            w.getJoueur().getInventory().remove(this.getName());
         }else{
             super.use(w, i);
         }

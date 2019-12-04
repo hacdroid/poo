@@ -27,9 +27,9 @@ public class Chair extends Item {
     public void use(World w) {
         System.out.println("You seat on the chair. You break the chair...\nNow, there is a stick on the ground, from the broken chair.");
         
-        w.getJOUEUR().getActualPlace().getThings().remove(this.getName());
+        w.getJoueur().getActualPlace().getThings().remove(this.getName());
         
-        w.getJOUEUR().getActualPlace().addThing(this.getItemHide());
+        w.getJoueur().getActualPlace().addThing(this.getItemHide());
         
     }
     

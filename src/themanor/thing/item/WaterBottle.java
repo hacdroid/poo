@@ -29,8 +29,8 @@ public class WaterBottle extends Bottle {
         if (i instanceof NPC){
             System.out.println("You give your water bottle to the man. He is really glad!\n"
                     + "In appreciation, he gives you the " + i.getItemHide().getName() + "!");
-            w.getJOUEUR().getInventory().put(i.getItemHide().getName(),(Item)i.getItemHide());
-            w.getJOUEUR().getInventory().remove(this.getName());
+            w.getJoueur().getInventory().put(i.getItemHide().getName(),(Item)i.getItemHide());
+            w.getJoueur().getInventory().remove(this.getName());
         }else{
             super.use(w, i);
         }

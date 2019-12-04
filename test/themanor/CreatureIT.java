@@ -38,7 +38,7 @@ public class CreatureIT {
     }
     @Test
     public void getIsOutTest2(){
-        c1.attacked(p, 20);
+        c1.attacked(20);
         assertTrue(c1.getIsOut());
     }
     
@@ -53,27 +53,21 @@ public class CreatureIT {
     }
     @Test
     public void getHpTest3(){
-        c1.attacked(p, 20);
+        c1.attacked(20);
         assertSame(0, c1.getHp());
     }
     
     
     @Test
     public void attackedTest1(){
-        c1.attacked(p, 5);
+        c1.attacked(5);
         assertSame(initial_hp_creature - 5, c1.getHp());
     }
     @Test
     public void attackedTest2(){
-        c1.attacked(p, -5);
+        c1.attacked(-5);
         assertSame(initial_hp_creature, c1.getHp());
     }
-    /*
-        Dans attacked
-            if (damage_taken > 0)
-                ...
-            else RIEN
-    */
     
     
     @Test

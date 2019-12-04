@@ -60,11 +60,14 @@ public abstract class Creature extends Thing {
      * @param damage_taken correspond aux points de vie perdu de type int
      */
     public void attacked(int damage_taken){
-        if (this.hp-damage_taken>=0)
+        if (damage_taken > 0)
         {
-            this.hp -= damage_taken;
-        } else {
-            this.hp=0;
+            if (this.hp-damage_taken>=0)
+            {
+                this.hp -= damage_taken;
+            } else {
+                this.hp=0;
+            }
         }
     }
     

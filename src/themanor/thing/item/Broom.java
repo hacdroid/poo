@@ -30,8 +30,8 @@ public class Broom extends Item implements Takable{
     public void use(World w,Item i){
         if (i instanceof Dust){
             System.out.println("You sweep the dust... There was " + i.getItemHide().getName() + " under the dust!\nThere is now, a key on the ground.");
-            w.getJOUEUR().getActualPlace().addThing(i.getItemHide());
-            w.getJOUEUR().getActualPlace().getThings().remove(i.getName());
+            w.getJoueur().getActualPlace().addThing(i.getItemHide());
+            w.getJoueur().getActualPlace().getThings().remove(i.getName());
         }else{
             super.use(w, i);
         }

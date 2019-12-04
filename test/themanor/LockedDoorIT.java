@@ -30,13 +30,6 @@ public class LockedDoorIT {
     
     
     @Test
-    public void openTest(){
-        d1.open();
-        assertFalse(d1.isOpen());
-    }
-    
-    
-    @Test
     public void openCodeTest1(){
         assertTrue(d1.open(1234));
     }

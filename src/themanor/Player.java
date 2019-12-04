@@ -38,8 +38,8 @@ public class Player {
      * @param w permet au joueur de connaitre son monde
      */
     public Player(String name, World w) {
-            this.NAME=name;
-            this.WORLD=w;
+        this.NAME=name;
+        this.WORLD=w;
     }
 
     
@@ -58,7 +58,8 @@ public class Player {
      * @param damage correspond aux points de vies perdu
      */
     public void attacked(int damage) {
-        this.hp -= damage;
+        if (damage > 0)
+            this.hp -= damage;
     }
 
     
@@ -110,7 +111,7 @@ public class Player {
      * car c'est la convention choisie.
      * Cette méthode n'est appelée que dans le package racine
      */
-    protected void saisieCommand() {
+    public void saisieCommand() {
         if (!this.getIsOut()){
             Boolean isException = false;
             Scanner sc = new Scanner(System.in);
@@ -380,7 +381,8 @@ public class Player {
      * @param hp correspond à la quantité de vie ajoutée 
      */
     public void addHp(int hp) {
-        this.hp += hp;
+        if (hp > 0)
+            this.hp += hp;
     }
 
     
@@ -406,7 +408,7 @@ public class Player {
      * Cette méthode est un setteur sur la mise en combat d'un joueur
      * @param inFight dit si le joueur est en combat, de type boolean 
      */
-    public void setFigth(boolean inFight) {
+    public void setFight(boolean inFight) {
         this.inFight = inFight;
     }
 
@@ -415,7 +417,7 @@ public class Player {
      * Cette méthode est un getteur de la variable booléenne inFight
      * @return true ou false
      */
-    public boolean isInFigth() {
+    public boolean isInFight() {
         return inFight;
     }
      

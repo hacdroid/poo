@@ -29,9 +29,9 @@ public class Wire extends Item implements Takable {
     public void use(World w,Item i){
         if (i instanceof Stick){
             System.out.println("You craft a " + this.getItemHide().getName() + "!");
-            w.getJOUEUR().getInventory().put(this.getItemHide().getName(),(Item)this.getItemHide());
-            w.getJOUEUR().getInventory().remove(this);
-            w.getJOUEUR().getInventory().remove(i);
+            w.getJoueur().getInventory().put(this.getItemHide().getName(),(Item)this.getItemHide());
+            w.getJoueur().getInventory().remove(this);
+            w.getJoueur().getInventory().remove(i);
         }else{
             super.use(w, i);
         }

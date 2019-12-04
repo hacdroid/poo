@@ -34,8 +34,8 @@ public class Wardrobe extends Item {
             System.out.println("It seems to be electronically locked!");
         } else {
             System.out.println("There is the " + this.getItemHide().getName() + " into this wardrobe!");
-            w.getJOUEUR().getActualPlace().getThings().remove(this.getName());
-            w.getJOUEUR().getActualPlace().addThing(this.getItemHide());
+            w.getJoueur().getActualPlace().getThings().remove(this.getName());
+            w.getJoueur().getActualPlace().addThing(this.getItemHide());
         }   
     }
 

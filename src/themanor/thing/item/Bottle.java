@@ -29,8 +29,8 @@ public class Bottle extends Item implements Takable {
     public void use(World w,Item i){
         if (i instanceof Fountain){
             System.out.println("You fill your bottle with water from the fountain.");
-            w.getJOUEUR().getInventory().put(i.getItemHide().getName(),(Item)i.getItemHide());
-            w.getJOUEUR().getInventory().remove(this.getName());
+            w.getJoueur().getInventory().put(i.getItemHide().getName(),(Item)i.getItemHide());
+            w.getJoueur().getInventory().remove(this.getName());
         }else{
             super.use(w, i);
         }
